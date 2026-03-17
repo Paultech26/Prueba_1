@@ -45,8 +45,9 @@ Mercado Cambiario se posiciona como **el primer marketplace digital de compra y 
 - **Aparición en rankings:** No figura en los top 7–10 de casas de cambio online de los principales comparadores peruanos (miciudad.pe, comparaeldolar.com, cambioseguro.com).
 
 ### 2.5 Regulación y Confianza Digital
-- **SBS:** No se confirmó registro explícito en el padrón de casas de cambio de la SBS — esto es un **riesgo crítico de confianza** para usuarios que verifican antes de operar.
-- **Señales de confianza en web:** No se pudo confirmar si el sitio muestra badges de registro SBS, HTTPS forzado, políticas de privacidad visibles o certificaciones de seguridad.
+- **SBS:** ✅ Registro SBS **03053-2024** publicado visiblemente en el footer del sitio — cumple con el estándar del sector.
+- **Google Business Profile:** ✅ Perfil activo en Google Maps bajo el nombre "Mercado Cambiario".
+- **Pendiente de reforzar:** Agregar sello UIF, políticas de privacidad visibles y FAQs de seguridad para fortalecer aún más la confianza.
 
 ---
 
@@ -58,7 +59,7 @@ Mercado Cambiario se posiciona como **el primer marketplace digital de compra y 
 | **Tucambista** | ~2017 | ✅ Confirmado | ✅ | Alta confianza, segmento retail |
 | **Kambista** | ~2016 | ✅ Confirmado | ✅ | Primera online, marca reconocida |
 | **Cambi** | ~2019 | ✅ Confirmado | ✅ | UX moderna |
-| **Mercado Cambiario** | 2025 | ⚠️ Sin confirmar | ❌ | Modelo marketplace innovador |
+| **Mercado Cambiario** | 2025 | ✅ 03053-2024 | ❌ | Modelo marketplace innovador |
 
 **Volumen del mercado:** Más de 70 casas de cambio virtuales compiten y mueven más de **US$ 2,400 millones** anuales en Perú.
 
@@ -82,8 +83,8 @@ Mercado Cambiario se posiciona como **el primer marketplace digital de compra y 
 - **Acción:** Gestionar alta en estos directorios. El tráfico referido desde comparadores es altísimo en este nicho.
 
 ### 5.2 Señales de confianza en el sitio
-- **Problema:** El usuario peruano es muy desconfiado con plataformas financieras nuevas.
-- **Acción:** Publicar número de registro SBS en el footer, incluir sello de registro UIF, mostrar reviews reales, añadir sección "Sobre Nosotros" con fotos del equipo, agregar FAQs de seguridad.
+- **Lo que ya está bien:** Registro SBS 03053-2024 en el footer ✅ y Google Business Profile activo ✅.
+- **Lo que falta:** Sello UIF visible, sección "Sobre Nosotros" con fotos del equipo, testimonios reales de clientes y FAQs de seguridad. Estos elementos reducen la fricción de conversión en usuarios nuevos.
 
 ### 5.3 SEO y contenido
 - **Problema:** Sin blog, sin contenido, sin backlinks = invisibilidad en búsquedas orgánicas.
@@ -150,9 +151,9 @@ Mercado Cambiario se posiciona como **el primer marketplace digital de compra y 
 
 ## 8. RIESGOS
 
-### 8.1 Riesgo Regulatorio — CRITICO
-- **Si no está registrado en SBS:** Riesgo de cierre, multas y daño reputacional irreparable. La SBS puede ordenar el cese de operaciones en cualquier momento.
-- **Resolución:** Verificar y publicar número de registro SBS inmediatamente.
+### 8.1 Riesgo Regulatorio — MITIGADO
+- ✅ Registro SBS 03053-2024 confirmado y publicado en el sitio.
+- **Pendiente:** Mantener al día las obligaciones de reporte ante la UIF y renovaciones de registro conforme la operación escale en volumen.
 
 ### 8.2 Riesgo de Lavado de Activos
 - Las casas de cambio son objetivo de la UIF (Unidad de Inteligencia Financiera). Sin protocolos robustos de KYC/AML, la plataforma queda expuesta a sanciones severas.
@@ -176,9 +177,10 @@ Mercado Cambiario se posiciona como **el primer marketplace digital de compra y 
 
 | Prioridad | Acción | Impacto | Esfuerzo |
 |---|---|---|---|
-| 🔴 Crítico | Confirmar y publicar registro SBS en el sitio | Confianza | Bajo |
-| 🔴 Crítico | Aparecer en comparaeldolar.com y otros comparadores | Tráfico | Bajo |
-| 🔴 Crítico | Activar Google Business Profile con reseñas | SEO local | Bajo |
+| ✅ Hecho | Registro SBS 03053-2024 publicado en footer | Confianza | — |
+| ✅ Hecho | Google Business Profile activo en Google Maps | SEO local | — |
+| 🔴 Crítico | Aparecer en cuantoestaeldolar.pe, cambioseguro.com y otros comparadores | Tráfico | Bajo |
+| 🔴 Crítico | Escalar reseñas en Google Business Profile (pedir activamente a clientes) | Confianza | Bajo |
 | 🟠 Alto | Lanzar blog con contenido de tipo de cambio | SEO orgánico | Medio |
 | 🟠 Alto | Activar LinkedIn + Instagram con contenido educativo | Marca | Medio |
 | 🟠 Alto | Desarrollar PWA o versión mobile optimizada | Conversión | Alto |
@@ -191,11 +193,11 @@ Mercado Cambiario se posiciona como **el primer marketplace digital de compra y 
 
 ## 10. CONCLUSIÓN
 
-**Mercado Cambiario** tiene una propuesta de valor genuinamente diferenciada (marketplace en tiempo real, 5 minutos de operación) y un equipo fundador con credenciales sólidas. Sin embargo, su presencia digital es muy incipiente: sin SEO consolidado, sin comunidad en redes sociales, sin app móvil, y con interrogantes regulatorias que generan fricción de confianza.
+**Mercado Cambiario** tiene una propuesta de valor genuinamente diferenciada (marketplace en tiempo real, 5 minutos de operación) y un equipo fundador con credenciales sólidas. Las bases regulatorias y de confianza están bien establecidas: registro SBS 03053-2024 publicado en el footer y Google Business Profile activo. Sin embargo, la presencia digital en otros frentes sigue siendo incipiente: sin SEO consolidado, sin comunidad activa en redes sociales y sin app móvil.
 
-El mayor riesgo en el corto plazo no es tecnológico ni de modelo de negocio — es de **confianza y visibilidad**. En fintech, el usuario no prueba lo que no conoce, y no confía en lo que no puede verificar.
+El mayor desafío en el corto plazo es la **visibilidad y el volumen de reseñas**. En fintech, el usuario no prueba lo que no conoce — y compara cantidad de reviews antes de decidir.
 
-Con inversión focalizada en los puntos críticos (registro SBS visible, presencia en comparadores, contenido educativo), la empresa tiene bases sólidas para escalar en un mercado de +US$ 2,400M con altísimo potencial de digitalización.
+Con inversión focalizada en los puntos pendientes (presencia en comparadores, contenido educativo, crecimiento de reseñas en Google), la empresa tiene bases sólidas para escalar en un mercado de +US$ 2,400M con altísimo potencial de digitalización.
 
 ---
 
