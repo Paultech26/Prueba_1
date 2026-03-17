@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Auditoría de Presencia Digital — mercadocambiario.pe</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: #f0f2f5;
+      color: #1a1a2e;
+      line-height: 1.7;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: linear-gradient(135deg, #0f3460 0%, #16213e 60%, #0d1b2a 100%);
+      color: #fff;
+      padding: 48px 40px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0; right: 0;
+      height: 40px;
+      background: #f0f2f5;
+      clip-path: ellipse(55% 100% at 50% 100%);
+    }
+    .header-logo {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #e94560;
+      margin-bottom: 12px;
+    }
+    header h1 {
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 16px;
+    }
+    header h1 span { color: #e94560; }
+    .header-meta {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      font-size: 13px;
+      color: #b0c4de;
+    }
+    .header-meta strong { color: #fff; }
+
+    /* ── LAYOUT ── */
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    /* ── SECTION ── */
+    .section {
+      background: #fff;
+      border-radius: 12px;
+      padding: 32px;
+      margin-bottom: 28px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.06);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 18px;
+      font-weight: 800;
+      color: #0f3460;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #e8ecf0;
+    }
+    .section-title .num {
+      background: #0f3460;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .sub-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #0f3460;
+      margin: 20px 0 8px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+
+    /* ── TABLA PERFIL ── */
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 0;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #e8ecf0;
+    }
+    .profile-grid .k {
+      background: #f6f8fb;
+      padding: 10px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #555;
+      border-bottom: 1px solid #e8ecf0;
+    }
+    .profile-grid .v {
+      padding: 10px 14px;
+      font-size: 13px;
+      border-bottom: 1px solid #e8ecf0;
+    }
+    .profile-grid .k:last-of-type,
+    .profile-grid .v:last-of-type { border-bottom: none; }
+    .profile-grid a { color: #e94560; }
+
+    .value-box {
+      background: linear-gradient(135deg, #e8f4fd, #f0f8ff);
+      border-left: 4px solid #0f3460;
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #1a1a2e;
+    }
+
+    /* ── LISTA BULLETS ── */
+    ul.bullets { list-style: none; padding: 0; }
+    ul.bullets li {
+      padding: 7px 0 7px 20px;
+      position: relative;
+      font-size: 14px;
+      border-bottom: 1px solid #f0f2f5;
+    }
+    ul.bullets li:last-child { border-bottom: none; }
+    ul.bullets li::before {
+      content: '›';
+      position: absolute; left: 0;
+      color: #e94560; font-weight: 700;
+    }
+    ul.bullets li strong { color: #0f3460; }
+
+    ol.numbered { padding-left: 20px; }
+    ol.numbered li {
+      padding: 7px 0;
+      font-size: 14px;
+      border-bottom: 1px solid #f0f2f5;
+    }
+    ol.numbered li:last-child { border-bottom: none; }
+    ol.numbered li strong { color: #0f3460; }
+
+    /* ── TABLA COMPETIDORES ── */
+    .table-wrap { overflow-x: auto; margin-top: 4px; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    thead tr { background: #0f3460; color: #fff; }
+    thead th { padding: 11px 14px; text-align: left; font-weight: 600; white-space: nowrap; }
+    tbody tr:nth-child(even) { background: #f6f8fb; }
+    tbody tr.highlight { background: #fff3cd; }
+    tbody tr.highlight td:first-child { font-weight: 700; color: #0f3460; }
+    tbody td { padding: 10px 14px; border-bottom: 1px solid #e8ecf0; vertical-align: middle; }
+
+    /* ── CARDS DE MEJORAS / OPORTUNIDADES / RIESGOS ── */
+    .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 600px) { .cards { grid-template-columns: 1fr; } }
+
+    .card {
+      border-radius: 10px;
+      padding: 18px 20px;
+      font-size: 13px;
+      border: 1px solid transparent;
+    }
+    .card-title {
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .card p { color: #444; margin-top: 4px; }
+    .card .label-ok { color: #1a7a4a; font-weight: 600; }
+    .card .label-gap { color: #c0392b; font-weight: 600; }
+
+    .card-blue   { background: #eaf2fb; border-color: #aac9e8; }
+    .card-orange { background: #fef3e2; border-color: #f0c87a; }
+    .card-green  { background: #eafaf1; border-color: #82d9a5; }
+    .card-red    { background: #fdecea; border-color: #e8a9a2; }
+    .card-gray   { background: #f6f8fb; border-color: #d0d6dd; }
+
+    /* ── FORTALEZAS ── */
+    .strengths { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 600px) { .strengths { grid-template-columns: 1fr; } }
+    .strength-item {
+      display: flex; gap: 12px;
+      background: #f6f8fb;
+      border-radius: 8px;
+      padding: 14px 16px;
+      font-size: 13px;
+      border-left: 3px solid #0f3460;
+    }
+    .strength-item .icon { font-size: 20px; flex-shrink: 0; }
+    .strength-item strong { display: block; color: #0f3460; margin-bottom: 2px; font-size: 13px; }
+
+    /* ── ROADMAP ── */
+    .roadmap { display: flex; flex-direction: column; gap: 8px; }
+    .roadmap-row {
+      display: grid;
+      grid-template-columns: 100px 1fr 110px 90px;
+      gap: 12px;
+      align-items: center;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+    }
+    @media (max-width: 640px) {
+      .roadmap-row { grid-template-columns: 1fr; }
+    }
+    .roadmap-row.done   { background: #eafaf1; }
+    .roadmap-row.red    { background: #fdecea; }
+    .roadmap-row.orange { background: #fef3e2; }
+    .roadmap-row.yellow { background: #fffde7; }
+    .roadmap-row.green  { background: #f6f8fb; }
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .badge-done   { background: #1a7a4a; color: #fff; }
+    .badge-red    { background: #c0392b; color: #fff; }
+    .badge-orange { background: #e67e22; color: #fff; }
+    .badge-yellow { background: #f39c12; color: #fff; }
+    .badge-green  { background: #27ae60; color: #fff; }
+    .roadmap-action { font-weight: 600; color: #1a1a2e; }
+    .roadmap-impact, .roadmap-effort {
+      font-size: 12px;
+      color: #666;
+    }
+
+    /* ── CONCLUSIÓN ── */
+    .conclusion {
+      background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+      color: #fff;
+      border-radius: 12px;
+      padding: 36px 32px;
+      margin-bottom: 28px;
+    }
+    .conclusion h2 {
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 16px;
+      color: #e94560;
+    }
+    .conclusion p {
+      font-size: 14px;
+      color: #cdd8e5;
+      margin-bottom: 12px;
+      line-height: 1.75;
+    }
+    .conclusion p strong { color: #fff; }
+    .conclusion p:last-child { margin-bottom: 0; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      font-size: 12px;
+      color: #999;
+      padding: 0 24px 40px;
+    }
+
+    /* ── BADGE DE ESTADO ── */
+    .status-row {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      margin-bottom: 20px;
+    }
+    .status-pill {
+      display: flex; align-items: center; gap: 6px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .pill-ok  { background: #eafaf1; color: #1a7a4a; border: 1px solid #82d9a5; }
+    .pill-warn{ background: #fef3e2; color: #b7770d; border: 1px solid #f0c87a; }
+    .pill-bad { background: #fdecea; color: #c0392b; border: 1px solid #e8a9a2; }
+
+    /* ── MARKET STAT ── */
+    .stat-box {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #f6f8fb;
+      border-radius: 8px;
+      padding: 12px 18px;
+      margin-top: 12px;
+      font-size: 13px;
+    }
+    .stat-box .big { font-size: 22px; font-weight: 800; color: #0f3460; }
+  </style>
+</head>
+<body>
+
+<!-- ════════════ HEADER ════════════ -->
+<header>
+  <div class="header-logo">Auditoría Digital · Fintech Perú</div>
+  <h1>Presencia Digital<br><span>mercadocambiario.pe</span></h1>
+  <div class="header-meta">
+    <span><strong>Fecha:</strong> Marzo 2026</span>
+    <span><strong>Analista:</strong> Claude Code (Anthropic)</span>
+    <span><strong>Sector:</strong> Fintech — Marketplace de divisas</span>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- ════ 1. PERFIL ════ -->
+  <div class="section">
+    <div class="section-title"><span class="num">1</span> Perfil del Negocio</div>
+
+    <div class="profile-grid">
+      <div class="k">Nombre</div>
+      <div class="v">Mercado Cambiario</div>
+      <div class="k">Web</div>
+      <div class="v"><a href="https://www.mercadocambiario.pe/" target="_blank">www.mercadocambiario.pe</a></div>
+      <div class="k">Tipo</div>
+      <div class="v">Fintech — Marketplace digital de compra/venta de dólares</div>
+      <div class="k">País</div>
+      <div class="v">Perú</div>
+      <div class="k">Inicio</div>
+      <div class="v">Febrero 2025</div>
+      <div class="k">Modelo</div>
+      <div class="v">Marketplace B2C / B2B</div>
+      <div class="k">Fundadores</div>
+      <div class="v">Fernando Balbuena (ex-BCP, Mibanco, 20 años) / Hugo Ortiz (25 años en banca digital)</div>
+    </div>
+
+    <div class="value-box">
+      <strong>Propuesta de Valor:</strong> Primer marketplace digital de compra y venta de dólares en Perú. Muestra en tiempo real todas las propuestas de compra y venta de todos los participantes. Resultado: transacciones en menos de <strong>5 minutos</strong> vs. 30–45 minutos del estándar del sector.
+    </div>
+  </div>
+
+  <!-- ════ 2. PRESENCIA DIGITAL ════ -->
+  <div class="section">
+    <div class="section-title"><span class="num">2</span> Presencia Digital — Estado Actual</div>
+
+    <div class="status-row">
+      <span class="status-pill pill-warn">⚠ Sitio Web — Crawlers bloqueados</span>
+      <span class="status-pill pill-bad">✗ SEO — Sin historial</span>
+      <span class="status-pill pill-bad">✗ Redes Sociales — Inactivas</span>
+      <span class="status-pill pill-warn">⚠ Reputación — Reseñas escasas</span>
+      <span class="status-pill pill-ok">✓ SBS Registrado</span>
+      <span class="status-pill pill-ok">✓ Google Business activo</span>
+    </div>
+
+    <div class="sub-title">2.1 Sitio Web</div>
+    <ul class="bullets">
+      <li><strong>Accesibilidad:</strong> Responde con HTTP 403 a crawlers — potencialmente problemático para SEO e indexación en Google.</li>
+      <li><strong>Antigüedad del dominio:</strong> Muy reciente → baja autoridad de dominio (DA) ante Google.</li>
+      <li><strong>App Móvil:</strong> No se encontró evidencia de app nativa en Google Play o App Store. Opera vía web.</li>
+      <li><strong>Velocidad / UX:</strong> No auditada directamente; diseño presumiblemente mobile-first.</li>
+    </ul>
+
+    <div class="sub-title">2.2 SEO (Posicionamiento Orgánico)</div>
+    <ul class="bullets">
+      <li><strong>Situación actual:</strong> Sin historial de backlinks ni autoridad de dominio consolidada (lanzamiento feb. 2025).</li>
+      <li><strong>Keywords objetivo:</strong> "comprar dólares online", "tipo de cambio hoy", "casa de cambio online Peru" — altamente competidas por Rextie, Tucambista, Kambista y Cambi.</li>
+      <li><strong>Contenido:</strong> Sin blog ni sección educativa que genere tráfico orgánico sostenido.</li>
+      <li><strong>Bloqueo a bots:</strong> El 403 a crawlers puede impedir indexación correcta.</li>
+    </ul>
+
+    <div class="sub-title">2.3 Redes Sociales</div>
+    <ul class="bullets">
+      <li><strong>Estado:</strong> Sin perfiles activos o verificados en LinkedIn, Instagram, Facebook, TikTok o X (Twitter).</li>
+      <li><strong>Brecha:</strong> Rextie y Tucambista tienen comunidades activas y campañas de contenido educativo. Mercado Cambiario carece de estrategia documentada.</li>
+    </ul>
+
+    <div class="sub-title">2.4 Reputación Online</div>
+    <ul class="bullets">
+      <li><strong>Reviews:</strong> Menos de 1 año de operación → base de reseñas en Google Maps prácticamente inexistente.</li>
+      <li><strong>Medios:</strong> Aparece en Startups Latam como caso de éxito — uno de los pocos registros públicos positivos.</li>
+      <li><strong>Rankings:</strong> No figura en los top 7–10 de casas de cambio online de comparaeldolar.com, miciudad.pe, cambioseguro.com.</li>
+    </ul>
+
+    <div class="sub-title">2.5 Regulación y Confianza Digital</div>
+    <ul class="bullets">
+      <li><strong>SBS:</strong> ✅ Registro SBS <strong>03053-2024</strong> publicado visiblemente en el footer — cumple el estándar del sector.</li>
+      <li><strong>Google Business Profile:</strong> ✅ Perfil activo en Google Maps bajo "Mercado Cambiario".</li>
+      <li><strong>Pendiente:</strong> Sello UIF visible, políticas de privacidad y FAQs de seguridad para mayor confianza.</li>
+    </ul>
+  </div>
+
+  <!-- ════ 3. COMPETITIVO ════ -->
+  <div class="section">
+    <div class="section-title"><span class="num">3</span> Análisis Competitivo</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Plataforma</th>
+            <th>Fundación</th>
+            <th>Registro SBS</th>
+            <th>App Móvil</th>
+            <th>Fortaleza principal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Rextie</td>
+            <td>~2016</td>
+            <td>✅ Confirmado</td>
+            <td>✅</td>
+            <td>Liderazgo, mayor base de usuarios</td>
+          </tr>
+          <tr>
+            <td>Tucambista</td>
+            <td>~2017</td>
+            <td>✅ Confirmado</td>
+            <td>✅</td>
+            <td>Alta confianza, segmento retail</td>
+          </tr>
+          <tr>
+            <td>Kambista</td>
+            <td>~2016</td>
+            <td>✅ Confirmado</td>
+            <td>✅</td>
+            <td>Primera online, marca reconocida</td>
+          </tr>
+          <tr>
+            <td>Cambi</td>
+            <td>~2019</td>
+            <td>✅ Confirmado</td>
+            <td>✅</td>
+            <td>UX moderna</td>
+          </tr>
+          <tr class="highlight">
+            <td><strong>Mercado Cambiario</strong></td>
+            <td>2025</td>
+            <td>✅ 03053-2024</td>
+            <td>❌</td>
+            <td>Modelo marketplace innovador</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="stat-box">
+      <span class="big">US$ 2,400M</span>
+      <span>anuales mueven más de 70 casas de cambio virtuales en Perú</span>
+    </div>
+  </div>
+
+  <!-- ════ 4. FORTALEZAS ════ -->
+  <div class="section">
+    <div class="section-title"><span class="num">4</span> Puntos Fuertes</div>
+    <div class="strengths">
+      <div class="strength-item">
+        <span class="icon">🏪</span>
+        <div><strong>Modelo diferenciado</strong>Marketplace todos contra todos, precio en tiempo real — difícil de replicar rápidamente.</div>
+      </div>
+      <div class="strength-item">
+        <span class="icon">⚡</span>
+        <div><strong>Velocidad superior</strong>Menos de 5 min vs. 30–45 min de la competencia — ventaja operacional concreta.</div>
+      </div>
+      <div class="strength-item">
+        <span class="icon">🏦</span>
+        <div><strong>Equipo senior</strong>Fundadores con trayectorias en BCP y Mibanco — credibilidad y conocimiento del sector.</div>
+      </div>
+      <div class="strength-item">
+        <span class="icon">💼</span>
+        <div><strong>Track record técnico</strong>Billetera electrónica de Mibanco (2012) — validador fuerte ante inversores.</div>
+      </div>
+      <div class="strength-item">
+        <span class="icon">🔁</span>
+        <div><strong>Alta recurrencia</strong>Alta tasa de operaciones repetidas — señal de product-market fit temprano.</div>
+      </div>
+      <div class="strength-item">
+        <span class="icon">📈</span>
+        <div><strong>350+ clientes activos</strong>A pocos meses del lanzamiento — ritmo de crecimiento inicial positivo.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ 5. MEJORAS ════ -->
+  <div class="section">
+    <div class="section-title"><span class="num">5</span> Puntos a Mejorar (Urgentes)</div>
+    <div class="cards">
+
+      <div class="card card-red">
+        <div class="card-title">5.1 Presencia en comparadores</div>
+        <p><span class="label-gap">Problema:</span> No aparecen en comparaeldolar.com, miciudad.pe, cambioseguro.com.</p>
+        <p style="margin-top:8px"><strong>Acción:</strong> Gestionar alta. El tráfico referido desde comparadores es crítico en este nicho.</p>
+      </div>
+
+      <div class="card card-blue">
+        <div class="card-title">5.2 Señales de confianza</div>
+        <p><span class="label-ok">Ya está bien:</span> Registro SBS 03053-2024 en footer ✅ y Google Business activo ✅.</p>
+        <p style="margin-top:8px"><strong>Falta:</strong> Sello UIF, "Sobre Nosotros" con fotos del equipo, testimonios reales, FAQs de seguridad.</p>
+      </div>
+
+      <div class="card card-orange">
+        <div class="card-title">5.3 SEO y Contenido</div>
+        <p><span class="label-gap">Problema:</span> Sin blog, sin contenido, sin backlinks = invisibilidad orgánica.</p>
+        <p style="margin-top:8px"><strong>Acción:</strong> Blog con tipo de cambio, tips, noticias financieras → tráfico orgánico sostenido.</p>
+      </div>
+
+      <div class="card card-orange">
+        <div class="card-title">5.4 Redes Sociales</div>
+        <p><span class="label-gap">Problema:</span> Ausencia total o mínima en redes sociales.</p>
+        <p style="margin-top:8px"><strong>Acción:</strong> Instagram, LinkedIn y TikTok con contenido educativo. Reels/TikToks de 60–90s tienen alto alcance orgánico.</p>
+      </div>
+
+      <div class="card card-gray">
+        <div class="card-title">5.5 App Móvil</div>
+        <p><span class="label-gap">Problema:</span> Sin app nativa.</p>
+        <p style="margin-top:8px"><strong>Acción:</strong> PWA como paso intermedio. El mercado peruano opera masivamente desde móvil.</p>
+      </div>
+
+      <div class="card card-gray">
+        <div class="card-title">5.6 Bloqueo de Crawlers</div>
+        <p><span class="label-gap">Problema:</span> El sitio devuelve 403 a bots/crawlers — afecta indexación en Google.</p>
+        <p style="margin-top:8px"><strong>Acción:</strong> Revisar robots.txt y reglas de firewall para permitir Googlebot.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ════ 6. OPORTUNIDADES ════ -->
+  <div class="section">
+    <div class="section-title"><span class="num">6</span> Oportunidades</div>
+    <div class="cards">
+
+      <div class="card card-green">
+        <div class="card-title">6.1 Segmento B2B</div>
+        <p>Ticket promedio empresas: <strong>US$ 11,900</strong> vs. US$ 1,300 en retail (~9x). Producto para tesorería corporativa con API, dashboard multi-usuario y reportes tributarios.</p>
+      </div>
+
+      <div class="card card-green">
+        <div class="card-title">6.2 Integración SUNAT</div>
+        <p>Reportes automáticos de operaciones (tipo de cambio oficial, ITF) — diferenciador enorme para empresas y contadores.</p>
+      </div>
+
+      <div class="card card-green">
+        <div class="card-title">6.3 Educación financiera</div>
+        <p>Gran mercado informal de cambio en la calle. YouTube/TikTok para educar y convertir ese mercado al canal digital.</p>
+      </div>
+
+      <div class="card card-green">
+        <div class="card-title">6.4 Alianzas estratégicas</div>
+        <p>Integración con Alegra, Concar, Yape, BIM, plataformas e-commerce peruanas para adopción masiva.</p>
+      </div>
+
+      <div class="card card-green">
+        <div class="card-title">6.5 Expansión regional</div>
+        <p>El modelo replica en Colombia, Chile, Bolivia — mercados con alta dolarización y poco desarrollo en exchange digital.</p>
+      </div>
+
+      <div class="card card-green">
+        <div class="card-title">6.6 API pública + Post-pandemia</div>
+        <p>API de tipo de cambio en tiempo real para terceros. El mercado online pasó del 11% al doble post-pandemia y sigue en expansión.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ════ 7. DESAFÍOS ════ -->
+  <div class="section">
+    <div class="section-title"><span class="num">7</span> Desafíos</div>
+    <ul class="bullets">
+      <li><strong>Credibilidad vs. incumbentes:</strong> Rextie, Tucambista y Kambista llevan 7–10 años con miles de reseñas y contratos corporativos. Competir frontalmente es costoso.</li>
+      <li><strong>CAC elevado:</strong> El costo de adquisición en fintech es alto. Sin capital de marketing, el crecimiento orgánico puede ser lento.</li>
+      <li><strong>Liquidez del marketplace:</strong> Requiere masa crítica en compradores Y vendedores. Sin volumen, el precio no se forma eficientemente.</li>
+      <li><strong>Educación del usuario:</strong> "Marketplace de divisas" es más complejo de explicar que "te cambio soles por dólares".</li>
+      <li><strong>Dependencia tecnológica:</strong> La ventaja de 5 minutos es tecnológica — un incidente de uptime o fallo en APIs bancarias la elimina instantáneamente.</li>
+    </ul>
+  </div>
+
+  <!-- ════ 8. RIESGOS ════ -->
+  <div class="section">
+    <div class="section-title"><span class="num">8</span> Riesgos</div>
+    <div class="cards">
+
+      <div class="card card-green">
+        <div class="card-title">8.1 Riesgo Regulatorio — MITIGADO ✅</div>
+        <p>Registro SBS 03053-2024 confirmado y publicado. <strong>Pendiente:</strong> mantener obligaciones UIF y renovaciones conforme escale el volumen.</p>
+      </div>
+
+      <div class="card card-orange">
+        <div class="card-title">8.2 Lavado de Activos</div>
+        <p>Casas de cambio son objetivo de la UIF. Sin protocolos KYC/AML robustos, la plataforma queda expuesta a sanciones severas.</p>
+      </div>
+
+      <div class="card card-orange">
+        <div class="card-title">8.3 Fraude / Ciberseguridad</div>
+        <p>Plataformas fintech nuevas son objetivos frecuentes de phishing e ingeniería social. Sin 2FA y certificaciones visibles, la fricción aumenta.</p>
+      </div>
+
+      <div class="card card-orange">
+        <div class="card-title">8.4 Liquidez de Mercado</div>
+        <p>En alta volatilidad cambiaria (frecuente en Perú), el marketplace puede quedarse sin liquidez en un lado, bloqueando operaciones.</p>
+      </div>
+
+      <div class="card card-red">
+        <div class="card-title">8.5 Riesgo de Imitación</div>
+        <p>Rextie y Tucambista tienen recursos para copiar el modelo marketplace en meses si ven tracción real.</p>
+      </div>
+
+      <div class="card card-red">
+        <div class="card-title">8.6 Reputación Temprana</div>
+        <p>Con 350 clientes activos, una experiencia negativa viral puede afectar desproporcionadamente la percepción de marca.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ════ 9. ROADMAP ════ -->
+  <div class="section">
+    <div class="section-title"><span class="num">9</span> Recomendaciones Prioritarias — Roadmap 90 días</div>
+    <div class="roadmap">
+
+      <div class="roadmap-row done">
+        <div><span class="badge badge-done">✅ Hecho</span></div>
+        <div class="roadmap-action">Registro SBS 03053-2024 publicado en footer</div>
+        <div class="roadmap-impact">Confianza</div>
+        <div class="roadmap-effort">—</div>
+      </div>
+
+      <div class="roadmap-row done">
+        <div><span class="badge badge-done">✅ Hecho</span></div>
+        <div class="roadmap-action">Google Business Profile activo en Google Maps</div>
+        <div class="roadmap-impact">SEO local</div>
+        <div class="roadmap-effort">—</div>
+      </div>
+
+      <div class="roadmap-row red">
+        <div><span class="badge badge-red">🔴 Crítico</span></div>
+        <div class="roadmap-action">Aparecer en cuantoestaeldolar.pe, cambioseguro.com y otros comparadores</div>
+        <div class="roadmap-impact">Tráfico</div>
+        <div class="roadmap-effort">Esfuerzo: Bajo</div>
+      </div>
+
+      <div class="roadmap-row red">
+        <div><span class="badge badge-red">🔴 Crítico</span></div>
+        <div class="roadmap-action">Escalar reseñas en Google Business Profile (pedir activamente a clientes)</div>
+        <div class="roadmap-impact">Confianza</div>
+        <div class="roadmap-effort">Esfuerzo: Bajo</div>
+      </div>
+
+      <div class="roadmap-row orange">
+        <div><span class="badge badge-orange">🟠 Alto</span></div>
+        <div class="roadmap-action">Lanzar blog con contenido de tipo de cambio</div>
+        <div class="roadmap-impact">SEO orgánico</div>
+        <div class="roadmap-effort">Esfuerzo: Medio</div>
+      </div>
+
+      <div class="roadmap-row orange">
+        <div><span class="badge badge-orange">🟠 Alto</span></div>
+        <div class="roadmap-action">Activar LinkedIn + Instagram con contenido educativo</div>
+        <div class="roadmap-impact">Marca</div>
+        <div class="roadmap-effort">Esfuerzo: Medio</div>
+      </div>
+
+      <div class="roadmap-row orange">
+        <div><span class="badge badge-orange">🟠 Alto</span></div>
+        <div class="roadmap-action">Desarrollar PWA o versión mobile optimizada</div>
+        <div class="roadmap-impact">Conversión</div>
+        <div class="roadmap-effort">Esfuerzo: Alto</div>
+      </div>
+
+      <div class="roadmap-row yellow">
+        <div><span class="badge badge-yellow">🟡 Medio</span></div>
+        <div class="roadmap-action">Implementar programa de referidos</div>
+        <div class="roadmap-impact">CAC</div>
+        <div class="roadmap-effort">Esfuerzo: Medio</div>
+      </div>
+
+      <div class="roadmap-row yellow">
+        <div><span class="badge badge-yellow">🟡 Medio</span></div>
+        <div class="roadmap-action">Lanzar producto B2B (tesorería corporativa)</div>
+        <div class="roadmap-impact">Ticket</div>
+        <div class="roadmap-effort">Esfuerzo: Alto</div>
+      </div>
+
+      <div class="roadmap-row yellow">
+        <div><span class="badge badge-yellow">🟡 Medio</span></div>
+        <div class="roadmap-action">Integrar reportes SUNAT automáticos</div>
+        <div class="roadmap-impact">Retención</div>
+        <div class="roadmap-effort">Esfuerzo: Alto</div>
+      </div>
+
+      <div class="roadmap-row green">
+        <div><span class="badge badge-green">🟢 Largo plazo</span></div>
+        <div class="roadmap-action">API pública de tipo de cambio</div>
+        <div class="roadmap-impact">Ecosistema</div>
+        <div class="roadmap-effort">Esfuerzo: Alto</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ════ 10. CONCLUSIÓN ════ -->
+  <div class="conclusion">
+    <h2>10. Conclusión</h2>
+    <p><strong>Mercado Cambiario</strong> tiene una propuesta de valor genuinamente diferenciada (marketplace en tiempo real, 5 minutos de operación) y un equipo fundador con credenciales sólidas. Las bases regulatorias y de confianza están bien establecidas: registro SBS <strong>03053-2024</strong> publicado en el footer y Google Business Profile activo.</p>
+    <p>Sin embargo, la presencia digital en otros frentes sigue siendo incipiente: sin SEO consolidado, sin comunidad activa en redes sociales y sin app móvil.</p>
+    <p>El mayor desafío en el corto plazo es la <strong>visibilidad y el volumen de reseñas</strong>. En fintech, el usuario no prueba lo que no conoce — y compara cantidad de reviews antes de decidir.</p>
+    <p>Con inversión focalizada en los puntos pendientes (presencia en comparadores, contenido educativo, crecimiento de reseñas en Google), la empresa tiene bases sólidas para escalar en un mercado de +US$ 2,400M con altísimo potencial de digitalización.</p>
+  </div>
+
+</div>
+
+<footer>
+  Fuentes: Startups Latam · Gestión PE · Tucambista Blog · SBS Peru · Comparaeldolar.com · CambioSeguro.com · Rextie Blog
+</footer>
+
+</body>
+</html>
