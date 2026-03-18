@@ -18,9 +18,17 @@
     header {
       background: linear-gradient(135deg, #0f3460 0%, #16213e 60%, #0d1b2a 100%);
       color: #fff;
-      padding: 48px 40px 40px;
+      padding: 48px 40px 44px;
       position: relative;
       overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: rgba(233,69,96,.08);
     }
     header::after {
       content: '';
@@ -39,10 +47,10 @@
       margin-bottom: 12px;
     }
     header h1 {
-      font-size: 28px;
+      font-size: 30px;
       font-weight: 800;
       line-height: 1.25;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
     header h1 span { color: #e94560; }
     .header-meta {
@@ -56,7 +64,7 @@
 
     /* ── LAYOUT ── */
     .container {
-      max-width: 960px;
+      max-width: 980px;
       margin: 0 auto;
       padding: 40px 24px 80px;
     }
@@ -64,10 +72,10 @@
     /* ── SECTION ── */
     .section {
       background: #fff;
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 32px;
       margin-bottom: 28px;
-      box-shadow: 0 2px 12px rgba(0,0,0,.06);
+      box-shadow: 0 2px 14px rgba(0,0,0,.06);
     }
 
     .section-title {
@@ -78,7 +86,7 @@
       font-weight: 800;
       color: #0f3460;
       margin-bottom: 24px;
-      padding-bottom: 12px;
+      padding-bottom: 14px;
       border-bottom: 2px solid #e8ecf0;
     }
     .section-title .num {
@@ -96,15 +104,15 @@
       font-size: 14px;
       font-weight: 700;
       color: #0f3460;
-      margin: 20px 0 8px;
+      margin: 22px 0 10px;
       text-transform: uppercase;
-      letter-spacing: .5px;
+      letter-spacing: .6px;
     }
 
-    /* ── TABLA PERFIL ── */
+    /* ── PERFIL GRID ── */
     .profile-grid {
       display: grid;
-      grid-template-columns: 160px 1fr;
+      grid-template-columns: 170px 1fr;
       gap: 0;
       border-radius: 8px;
       overflow: hidden;
@@ -137,10 +145,46 @@
       color: #1a1a2e;
     }
 
-    /* ── LISTA BULLETS ── */
+    /* ── DIRECTORIO CARDS ── */
+    .founder-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 640px) { .founder-grid { grid-template-columns: 1fr; } }
+    .founder-card {
+      background: #f6f8fb;
+      border-radius: 10px;
+      padding: 16px;
+      border-top: 3px solid #0f3460;
+      font-size: 13px;
+    }
+    .founder-card .name { font-weight: 700; color: #0f3460; font-size: 14px; margin-bottom: 3px; }
+    .founder-card .role { color: #e94560; font-weight: 600; font-size: 12px; margin-bottom: 6px; }
+    .founder-card .bio { color: #555; font-size: 12px; line-height: 1.5; }
+
+    .board-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 640px) { .board-grid { grid-template-columns: 1fr; } }
+    .board-card {
+      background: linear-gradient(135deg, #fff8e1, #fffde7);
+      border-radius: 10px;
+      padding: 16px;
+      border-left: 4px solid #f39c12;
+      font-size: 13px;
+    }
+    .board-card .name { font-weight: 700; color: #0f3460; font-size: 14px; margin-bottom: 2px; }
+    .board-card .role { color: #b7770d; font-weight: 600; font-size: 12px; margin-bottom: 6px; }
+    .board-card .bio { color: #555; font-size: 12px; line-height: 1.5; }
+
+    /* ── BULLETS / NUMBERED ── */
     ul.bullets { list-style: none; padding: 0; }
     ul.bullets li {
-      padding: 7px 0 7px 20px;
+      padding: 8px 0 8px 20px;
       position: relative;
       font-size: 14px;
       border-bottom: 1px solid #f0f2f5;
@@ -153,53 +197,79 @@
     }
     ul.bullets li strong { color: #0f3460; }
 
-    ol.numbered { padding-left: 20px; }
-    ol.numbered li {
-      padding: 7px 0;
-      font-size: 14px;
-      border-bottom: 1px solid #f0f2f5;
+    /* ── STATUS PILLS ── */
+    .status-row {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      margin-bottom: 22px;
     }
-    ol.numbered li:last-child { border-bottom: none; }
-    ol.numbered li strong { color: #0f3460; }
+    .status-pill {
+      display: flex; align-items: center; gap: 6px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .pill-ok   { background: #eafaf1; color: #1a7a4a; border: 1px solid #82d9a5; }
+    .pill-warn { background: #fef3e2; color: #b7770d; border: 1px solid #f0c87a; }
+    .pill-bad  { background: #fdecea; color: #c0392b; border: 1px solid #e8a9a2; }
 
-    /* ── TABLA COMPETIDORES ── */
+    /* ── TABLA REDES SOCIALES ── */
+    .rrss-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 4px; }
+    .rrss-table thead tr { background: #0f3460; color: #fff; }
+    .rrss-table thead th { padding: 10px 14px; text-align: left; font-weight: 600; }
+    .rrss-table tbody tr:nth-child(even) { background: #f6f8fb; }
+    .rrss-table tbody td { padding: 10px 14px; border-bottom: 1px solid #e8ecf0; vertical-align: middle; }
+    .tag-ok  { display:inline-block; background:#eafaf1; color:#1a7a4a; border:1px solid #82d9a5; border-radius:12px; padding:2px 10px; font-size:11px; font-weight:700; }
+    .tag-bad { display:inline-block; background:#fdecea; color:#c0392b; border:1px solid #e8a9a2; border-radius:12px; padding:2px 10px; font-size:11px; font-weight:700; }
+    .tag-warn{ display:inline-block; background:#fef3e2; color:#b7770d; border:1px solid #f0c87a; border-radius:12px; padding:2px 10px; font-size:11px; font-weight:700; }
+
+    /* ── STACK TECH ── */
+    .stack-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 640px) { .stack-grid { grid-template-columns: 1fr; } }
+    .stack-item {
+      background: #f6f8fb;
+      border-radius: 8px;
+      padding: 14px 16px;
+      font-size: 13px;
+      border-left: 3px solid #e94560;
+    }
+    .stack-item .st-label { font-weight: 700; color: #0f3460; margin-bottom: 3px; font-size: 12px; text-transform: uppercase; letter-spacing: .4px; }
+    .stack-item .st-val { color: #333; }
+    .stack-item .st-note { color: #888; font-size: 12px; margin-top: 4px; }
+
+    /* ── TABLA COMPETITIVO ── */
     .table-wrap { overflow-x: auto; margin-top: 4px; }
-    table {
+    table.comp {
       width: 100%;
       border-collapse: collapse;
       font-size: 13px;
     }
-    thead tr { background: #0f3460; color: #fff; }
-    thead th { padding: 11px 14px; text-align: left; font-weight: 600; white-space: nowrap; }
-    tbody tr:nth-child(even) { background: #f6f8fb; }
-    tbody tr.highlight { background: #fff3cd; }
-    tbody tr.highlight td:first-child { font-weight: 700; color: #0f3460; }
-    tbody td { padding: 10px 14px; border-bottom: 1px solid #e8ecf0; vertical-align: middle; }
+    table.comp thead tr { background: #0f3460; color: #fff; }
+    table.comp thead th { padding: 11px 14px; text-align: left; font-weight: 600; white-space: nowrap; }
+    table.comp tbody tr:nth-child(even) { background: #f6f8fb; }
+    table.comp tbody tr.highlight { background: #fff3cd; }
+    table.comp tbody tr.highlight td:first-child { font-weight: 700; color: #0f3460; }
+    table.comp tbody td { padding: 10px 14px; border-bottom: 1px solid #e8ecf0; vertical-align: middle; }
 
-    /* ── CARDS DE MEJORAS / OPORTUNIDADES / RIESGOS ── */
-    .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    @media (max-width: 600px) { .cards { grid-template-columns: 1fr; } }
-
-    .card {
+    /* ── STAT BOXES ── */
+    .stat-row {
+      display: flex; flex-wrap: wrap; gap: 14px;
+      margin-top: 18px;
+    }
+    .stat-box {
+      flex: 1 1 180px;
+      background: #f6f8fb;
       border-radius: 10px;
-      padding: 18px 20px;
-      font-size: 13px;
-      border: 1px solid transparent;
+      padding: 16px 20px;
+      text-align: center;
+      border-top: 3px solid #0f3460;
     }
-    .card-title {
-      font-size: 13px;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-    .card p { color: #444; margin-top: 4px; }
-    .card .label-ok { color: #1a7a4a; font-weight: 600; }
-    .card .label-gap { color: #c0392b; font-weight: 600; }
-
-    .card-blue   { background: #eaf2fb; border-color: #aac9e8; }
-    .card-orange { background: #fef3e2; border-color: #f0c87a; }
-    .card-green  { background: #eafaf1; border-color: #82d9a5; }
-    .card-red    { background: #fdecea; border-color: #e8a9a2; }
-    .card-gray   { background: #f6f8fb; border-color: #d0d6dd; }
+    .stat-box .big { font-size: 24px; font-weight: 800; color: #0f3460; display: block; }
+    .stat-box .lbl { font-size: 12px; color: #666; margin-top: 4px; }
 
     /* ── FORTALEZAS ── */
     .strengths { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -212,23 +282,54 @@
       font-size: 13px;
       border-left: 3px solid #0f3460;
     }
-    .strength-item .icon { font-size: 20px; flex-shrink: 0; }
+    .strength-item .icon { font-size: 22px; flex-shrink: 0; }
     .strength-item strong { display: block; color: #0f3460; margin-bottom: 2px; font-size: 13px; }
+
+    /* ── CARDS ── */
+    .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 600px) { .cards { grid-template-columns: 1fr; } }
+    .card {
+      border-radius: 10px;
+      padding: 18px 20px;
+      font-size: 13px;
+      border: 1px solid transparent;
+    }
+    .card-title { font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+    .card p { color: #444; margin-top: 4px; }
+    .card .label-ok  { color: #1a7a4a; font-weight: 600; }
+    .card .label-gap { color: #c0392b; font-weight: 600; }
+    .card-blue   { background: #eaf2fb; border-color: #aac9e8; }
+    .card-orange { background: #fef3e2; border-color: #f0c87a; }
+    .card-green  { background: #eafaf1; border-color: #82d9a5; }
+    .card-red    { background: #fdecea; border-color: #e8a9a2; }
+    .card-gray   { background: #f6f8fb; border-color: #d0d6dd; }
+    .card-yellow { background: #fffde7; border-color: #f9e07a; }
+
+    /* ── RISK TABLE ── */
+    .risk-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .risk-table thead tr { background: #0f3460; color: #fff; }
+    .risk-table thead th { padding: 10px 14px; text-align: left; font-weight: 600; }
+    .risk-table tbody tr { border-bottom: 1px solid #e8ecf0; }
+    .risk-table tbody tr:nth-child(even) { background: #f6f8fb; }
+    .risk-table tbody td { padding: 10px 14px; vertical-align: top; }
+    .risk-level { display:inline-block; border-radius:12px; padding:2px 10px; font-size:11px; font-weight:700; }
+    .risk-alto    { background:#fdecea; color:#c0392b; border:1px solid #e8a9a2; }
+    .risk-medio   { background:#fef3e2; color:#b7770d; border:1px solid #f0c87a; }
+    .risk-bajo    { background:#eafaf1; color:#1a7a4a; border:1px solid #82d9a5; }
+    .risk-critico { background:#c0392b; color:#fff; }
 
     /* ── ROADMAP ── */
     .roadmap { display: flex; flex-direction: column; gap: 8px; }
     .roadmap-row {
       display: grid;
-      grid-template-columns: 100px 1fr 110px 90px;
+      grid-template-columns: 110px 1fr 120px 100px;
       gap: 12px;
       align-items: center;
       padding: 12px 16px;
       border-radius: 8px;
       font-size: 13px;
     }
-    @media (max-width: 640px) {
-      .roadmap-row { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 640px) { .roadmap-row { grid-template-columns: 1fr; } }
     .roadmap-row.done   { background: #eafaf1; }
     .roadmap-row.red    { background: #fdecea; }
     .roadmap-row.orange { background: #fef3e2; }
@@ -249,82 +350,51 @@
     .badge-yellow { background: #f39c12; color: #fff; }
     .badge-green  { background: #27ae60; color: #fff; }
     .roadmap-action { font-weight: 600; color: #1a1a2e; }
-    .roadmap-impact, .roadmap-effort {
-      font-size: 12px;
-      color: #666;
-    }
+    .roadmap-impact, .roadmap-effort { font-size: 12px; color: #666; }
 
     /* ── CONCLUSIÓN ── */
     .conclusion {
       background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
       color: #fff;
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 36px 32px;
       margin-bottom: 28px;
     }
-    .conclusion h2 {
-      font-size: 20px;
-      font-weight: 800;
-      margin-bottom: 16px;
-      color: #e94560;
-    }
-    .conclusion p {
-      font-size: 14px;
-      color: #cdd8e5;
-      margin-bottom: 12px;
-      line-height: 1.75;
-    }
+    .conclusion h2 { font-size: 20px; font-weight: 800; margin-bottom: 16px; color: #e94560; }
+    .conclusion p { font-size: 14px; color: #cdd8e5; margin-bottom: 12px; line-height: 1.8; }
     .conclusion p strong { color: #fff; }
     .conclusion p:last-child { margin-bottom: 0; }
 
     /* ── FOOTER ── */
-    footer {
-      text-align: center;
-      font-size: 12px;
-      color: #999;
-      padding: 0 24px 40px;
-    }
+    footer { text-align: center; font-size: 12px; color: #999; padding: 0 24px 40px; }
 
-    /* ── BADGE DE ESTADO ── */
-    .status-row {
-      display: flex; flex-wrap: wrap; gap: 10px;
-      margin-bottom: 20px;
-    }
-    .status-pill {
-      display: flex; align-items: center; gap: 6px;
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 600;
-    }
-    .pill-ok  { background: #eafaf1; color: #1a7a4a; border: 1px solid #82d9a5; }
-    .pill-warn{ background: #fef3e2; color: #b7770d; border: 1px solid #f0c87a; }
-    .pill-bad { background: #fdecea; color: #c0392b; border: 1px solid #e8a9a2; }
-
-    /* ── MARKET STAT ── */
-    .stat-box {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: #f6f8fb;
+    /* ── ALERT BOX ── */
+    .alert {
       border-radius: 8px;
-      padding: 12px 18px;
-      margin-top: 12px;
+      padding: 14px 18px;
       font-size: 13px;
+      margin-top: 16px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
     }
-    .stat-box .big { font-size: 22px; font-weight: 800; color: #0f3460; }
+    .alert-icon { font-size: 18px; flex-shrink: 0; }
+    .alert-red    { background: #fdecea; border-left: 4px solid #c0392b; color: #7b241c; }
+    .alert-yellow { background: #fffde7; border-left: 4px solid #f39c12; color: #7d6608; }
+    .alert-green  { background: #eafaf1; border-left: 4px solid #27ae60; color: #1a5e35; }
   </style>
 </head>
 <body>
 
 <!-- ════════════ HEADER ════════════ -->
 <header>
-  <div class="header-logo">Auditoría Digital · Fintech Perú</div>
+  <div class="header-logo">Auditoría Digital · Fintech Perú · Marzo 2026</div>
   <h1>Presencia Digital<br><span>mercadocambiario.pe</span></h1>
   <div class="header-meta">
     <span><strong>Fecha:</strong> Marzo 2026</span>
     <span><strong>Analista:</strong> Claude Code (Anthropic)</span>
     <span><strong>Sector:</strong> Fintech — Marketplace de divisas</span>
+    <span><strong>Versión:</strong> 2.0 — Auditoría completa</span>
   </div>
 </header>
 
@@ -336,23 +406,65 @@
 
     <div class="profile-grid">
       <div class="k">Nombre</div>
-      <div class="v">Mercado Cambiario</div>
+      <div class="v">Mercado Cambiario S.A.</div>
       <div class="k">Web</div>
       <div class="v"><a href="https://www.mercadocambiario.pe/" target="_blank">www.mercadocambiario.pe</a></div>
       <div class="k">Tipo</div>
-      <div class="v">Fintech — Marketplace digital de compra/venta de dólares</div>
+      <div class="v">Fintech — Primer marketplace digital de compra/venta de dólares en Perú</div>
       <div class="k">País</div>
       <div class="v">Perú</div>
-      <div class="k">Inicio</div>
-      <div class="v">Febrero 2025</div>
+      <div class="k">Inicio ops.</div>
+      <div class="v">Febrero 2025 (desarrollo desde 2021)</div>
       <div class="k">Modelo</div>
-      <div class="v">Marketplace B2C / B2B</div>
-      <div class="k">Fundadores</div>
-      <div class="v">Fernando Balbuena (ex-BCP, Mibanco, 20 años) / Hugo Ortiz (25 años en banca digital)</div>
+      <div class="v">Marketplace con libro de órdenes visible en tiempo real (B2C + B2B)</div>
+      <div class="k">Registro SBS</div>
+      <div class="v"><strong>03053-2024</strong> — publicado en footer del sitio</div>
+      <div class="k">Clientes activos</div>
+      <div class="v">350+ (al lanzamiento, febrero 2025)</div>
+      <div class="k">Velocidad</div>
+      <div class="v">Menos de 5 minutos por operación (vs. 30–45 min del sector)</div>
     </div>
 
     <div class="value-box">
-      <strong>Propuesta de Valor:</strong> Primer marketplace digital de compra y venta de dólares en Perú. Muestra en tiempo real todas las propuestas de compra y venta de todos los participantes. Resultado: transacciones en menos de <strong>5 minutos</strong> vs. 30–45 minutos del estándar del sector.
+      <strong>Propuesta de Valor:</strong> Mercado Cambiario es el <strong>único marketplace de divisas en Perú</strong>. A diferencia de las ~40 casas de cambio digitales que operan con precio fijo (modelo OTC), muestra en tiempo real todas las propuestas de compra y venta de todos los participantes. El precio lo determina el mercado, no el intermediario — análogo a lo que la BVL fue respecto a comprar acciones en ventanilla bancaria.
+    </div>
+
+    <div class="sub-title">Equipo Fundador</div>
+    <div class="founder-grid">
+      <div class="founder-card">
+        <div class="name">Fernando Balbuena Favarato</div>
+        <div class="role">Presidente y Co-fundador</div>
+        <div class="bio">20 años en BCP y Mibanco. Lideró el desarrollo de la primera billetera electrónica de Mibanco (2012).</div>
+      </div>
+      <div class="founder-card">
+        <div class="name">Hugo Ortiz</div>
+        <div class="role">Co-fundador · Gerente de Negocios</div>
+        <div class="bio">25 años en banca digital y desarrollo de productos financieros.</div>
+      </div>
+      <div class="founder-card">
+        <div class="name">José Agois</div>
+        <div class="role">Co-fundador · Gerente General</div>
+        <div class="bio">+30 años en sistemas y operaciones: Banco Santander, Banco Sur, Mibanco.</div>
+      </div>
+    </div>
+
+    <div class="sub-title">Directorio Institucional</div>
+    <div class="board-grid">
+      <div class="board-card">
+        <div class="name">Oscar Rivera</div>
+        <div class="role">Miembro del Directorio</div>
+        <div class="bio">Expresidente de <strong>ASBANC</strong> (Asociación de Bancos del Perú) y <strong>FELABAN</strong> (Federación Latinoamericana de Bancos). Máxima representación institucional del sistema bancario del Perú y Latinoamérica.</div>
+      </div>
+      <div class="board-card">
+        <div class="name">Francis Stenning</div>
+        <div class="role">Miembro del Directorio</div>
+        <div class="bio">Ex Gerente General y Director de la <strong>Bolsa de Valores de Lima (BVL)</strong>. Su expertise en mercados de capitales es directamente relevante para el modelo marketplace.</div>
+      </div>
+    </div>
+
+    <div class="alert alert-green">
+      <div class="alert-icon">★</div>
+      <div><strong>Activo subutilizado:</strong> Este directorio (ex-presidente ASBANC + ex-CEO de la BVL) es extraordinariamente valioso para una startup y actualmente no está visible en el sitio web ni en las comunicaciones públicas. Publicarlo sería un diferenciador de confianza único en el sector.</div>
     </div>
   </div>
 
@@ -362,350 +474,578 @@
 
     <div class="status-row">
       <span class="status-pill pill-warn">⚠ Sitio Web — Crawlers bloqueados</span>
-      <span class="status-pill pill-bad">✗ SEO — Sin historial</span>
-      <span class="status-pill pill-bad">✗ Redes Sociales — Inactivas</span>
+      <span class="status-pill pill-bad">✗ SEO — Sin historial consolidado</span>
+      <span class="status-pill pill-warn">⚠ RRSS — Parcialmente activas</span>
       <span class="status-pill pill-warn">⚠ Reputación — Reseñas escasas</span>
-      <span class="status-pill pill-ok">✓ SBS Registrado</span>
+      <span class="status-pill pill-ok">✓ SBS Registrado 03053-2024</span>
       <span class="status-pill pill-ok">✓ Google Business activo</span>
     </div>
 
     <div class="sub-title">2.1 Sitio Web</div>
     <ul class="bullets">
-      <li><strong>Accesibilidad:</strong> Responde con HTTP 403 a crawlers — potencialmente problemático para SEO e indexación en Google.</li>
-      <li><strong>Antigüedad del dominio:</strong> Muy reciente → baja autoridad de dominio (DA) ante Google.</li>
-      <li><strong>App Móvil:</strong> No se encontró evidencia de app nativa en Google Play o App Store. Opera vía web.</li>
-      <li><strong>Velocidad / UX:</strong> No auditada directamente; diseño presumiblemente mobile-first.</li>
+      <li><strong>Accesibilidad:</strong> El sitio responde con HTTP 403 a crawlers — potencialmente problemático para la indexación en Google y para herramientas de análisis legítimas.</li>
+      <li><strong>Antigüedad del dominio:</strong> Muy reciente (lanzado feb. 2025) → baja Autoridad de Dominio (DA) ante Google. Requiere tiempo + contenido + backlinks para crecer.</li>
+      <li><strong>App Móvil:</strong> Sin evidencia de app nativa en Google Play o App Store. El servicio opera vía web.</li>
+      <li><strong>Velocidad / UX:</strong> No auditada directamente; el modelo marketplace requiere una UX especialmente clara para usuarios no familiarizados con libros de órdenes.</li>
     </ul>
 
     <div class="sub-title">2.2 SEO (Posicionamiento Orgánico)</div>
     <ul class="bullets">
-      <li><strong>Situación actual:</strong> Sin historial de backlinks ni autoridad de dominio consolidada (lanzamiento feb. 2025).</li>
-      <li><strong>Keywords objetivo:</strong> "comprar dólares online", "tipo de cambio hoy", "casa de cambio online Peru" — altamente competidas por Rextie, Tucambista, Kambista y Cambi.</li>
-      <li><strong>Contenido:</strong> Sin blog ni sección educativa que genere tráfico orgánico sostenido.</li>
-      <li><strong>Bloqueo a bots:</strong> El 403 a crawlers puede impedir indexación correcta.</li>
+      <li><strong>Situación actual:</strong> Sin historial de backlinks ni autoridad consolidada — invisible en búsquedas orgánicas frente a Rextie, Kambista y Tucambista (9+ años de historial).</li>
+      <li><strong>Keywords competidas:</strong> "comprar dólares online", "tipo de cambio hoy", "casa de cambio online Perú" — Rextie y Kambista dominan la primera página de Google.</li>
+      <li><strong>Sin blog ni contenido:</strong> Sin sección educativa que genere tráfico orgánico sostenido y backlinks naturales.</li>
+      <li><strong>Bloqueo a Googlebot:</strong> El error 403 a crawlers puede estar impidiendo la indexación correcta de páginas internas.</li>
+      <li><strong>Sin aparición en comparadores:</strong> No figura en cuantoestaeldolar.pe, comparaeldolar.com, cambioseguro.com — fuentes clave de tráfico referido en este nicho.</li>
     </ul>
 
     <div class="sub-title">2.3 Redes Sociales</div>
-    <ul class="bullets">
-      <li><strong>Estado:</strong> Sin perfiles activos o verificados en LinkedIn, Instagram, Facebook, TikTok o X (Twitter).</li>
-      <li><strong>Brecha:</strong> Rextie y Tucambista tienen comunidades activas y campañas de contenido educativo. Mercado Cambiario carece de estrategia documentada.</li>
-    </ul>
+    <div class="table-wrap">
+      <table class="rrss-table">
+        <thead>
+          <tr>
+            <th>Red</th>
+            <th>Estado</th>
+            <th>Handle / URL</th>
+            <th>Situación</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>LinkedIn</strong></td>
+            <td><span class="tag-ok">✅ Activo</span></td>
+            <td>linkedin.com/company/mercado-cambiario</td>
+            <td>Página de empresa activa. Posts publicados. Hashtags: #mercadocambiario #elmejortipodecambio</td>
+          </tr>
+          <tr>
+            <td><strong>Instagram</strong></td>
+            <td><span class="tag-ok">✅ Activo</span></td>
+            <td>@mercadocambiario</td>
+            <td>Cuenta confirmada por los fundadores. Presencia en construcción.</td>
+          </tr>
+          <tr>
+            <td><strong>YouTube</strong></td>
+            <td><span class="tag-ok">✅ Activo</span></td>
+            <td>Canal Mercado Cambiario</td>
+            <td>Canal confirmado. Oportunidad de contenido educativo sobre el modelo marketplace.</td>
+          </tr>
+          <tr>
+            <td><strong>Facebook</strong></td>
+            <td><span class="tag-bad">❌ No detectado</span></td>
+            <td>—</td>
+            <td>Sin resultados públicos atribuibles a la empresa.</td>
+          </tr>
+          <tr>
+            <td><strong>TikTok</strong></td>
+            <td><span class="tag-bad">❌ No detectado</span></td>
+            <td>—</td>
+            <td>Sin presencia. Canal de alto alcance orgánico para el segmento retail.</td>
+          </tr>
+          <tr>
+            <td><strong>X / Twitter</strong></td>
+            <td><span class="tag-bad">❌ No detectado</span></td>
+            <td>—</td>
+            <td>Sin presencia. Relevante para público financiero/empresarial.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="alert alert-yellow">
+      <div class="alert-icon">⚠</div>
+      <div><strong>Brecha frente a la competencia:</strong> Kambista (454,000 usuarios registrados) y Rextie (US$4,000M/año) tienen comunidades activas en todas las redes con campañas de contenido educativo. LinkedIn, Instagram y YouTube están activos — el siguiente paso es establecer una <strong>cadencia de publicación constante</strong> y añadir TikTok para alcance masivo en segmento retail.</div>
+    </div>
 
     <div class="sub-title">2.4 Reputación Online</div>
     <ul class="bullets">
-      <li><strong>Reviews:</strong> Menos de 1 año de operación → base de reseñas en Google Maps prácticamente inexistente.</li>
-      <li><strong>Medios:</strong> Aparece en Startups Latam como caso de éxito — uno de los pocos registros públicos positivos.</li>
-      <li><strong>Rankings:</strong> No figura en los top 7–10 de casas de cambio online de comparaeldolar.com, miciudad.pe, cambioseguro.com.</li>
+      <li><strong>Reseñas Google:</strong> Menos de 14 meses de operación → base de reseñas prácticamente inexistente. Crítico: el usuario fintech compara cantidad y calidad de reseñas antes de registrarse.</li>
+      <li><strong>Mención en medios:</strong> Aparece en <em>Startups Latam</em> (entrevista al fundador) y como caso de éxito en <em>Odoo</em>. <strong>Sin cobertura</strong> en Gestión, El Comercio, RPP, Semana Económica.</li>
+      <li><strong>Comparadores:</strong> No figura en los top 7–10 de casas de cambio online de los principales comparadores peruanos.</li>
     </ul>
 
     <div class="sub-title">2.5 Regulación y Confianza Digital</div>
     <ul class="bullets">
-      <li><strong>SBS:</strong> ✅ Registro SBS <strong>03053-2024</strong> publicado visiblemente en el footer — cumple el estándar del sector.</li>
-      <li><strong>Google Business Profile:</strong> ✅ Perfil activo en Google Maps bajo "Mercado Cambiario".</li>
-      <li><strong>Pendiente:</strong> Sello UIF visible, políticas de privacidad y FAQs de seguridad para mayor confianza.</li>
+      <li><strong>Registro SBS 03053-2024:</strong> ✅ Publicado visiblemente en el footer — cumple y supera el estándar del sector.</li>
+      <li><strong>Google Business Profile:</strong> ✅ Perfil activo bajo "Mercado Cambiario" — base para acumulación de reseñas.</li>
+      <li><strong>Pendiente de reforzar:</strong> Sello UIF visible en el sitio, sección "Sobre Nosotros" con fotos del equipo y directorio, FAQs de seguridad y testimonios reales de clientes.</li>
     </ul>
   </div>
 
-  <!-- ════ 3. COMPETITIVO ════ -->
+  <!-- ════ 3. STACK TECNOLÓGICO ════ -->
   <div class="section">
-    <div class="section-title"><span class="num">3</span> Análisis Competitivo</div>
+    <div class="section-title"><span class="num">3</span> Stack Tecnológico</div>
+
+    <div class="stack-grid">
+      <div class="stack-item">
+        <div class="st-label">ERP / Back-office</div>
+        <div class="st-val"><strong>Odoo</strong> (confirmado)</div>
+        <div class="st-note">Aparece como caso de éxito en odoo.com. Gestiona contabilidad, CRM, facturación electrónica, KYC básico y reportes regulatorios UIF.</div>
+      </div>
+      <div class="stack-item">
+        <div class="st-label">Motor del Marketplace</div>
+        <div class="st-val">Desarrollo propio</div>
+        <div class="st-note">Sin indicios de solución white-label. El libro de órdenes en tiempo real es desarrollo propietario del equipo.</div>
+      </div>
+      <div class="stack-item">
+        <div class="st-label">Integración Bancaria</div>
+        <div class="st-val">API propia con bancos</div>
+        <div class="st-note">Permite liquidación en &lt;5 minutos. Mencionado explícitamente por los fundadores como ventaja operacional clave.</div>
+      </div>
+      <div class="stack-item">
+        <div class="st-label">KYC / Identidad Digital</div>
+        <div class="st-val">Probable API RENIEC / biometría</div>
+        <div class="st-note">Obligatorio por normativa SBS/UIF. Verificación de identidad requerida para operar legalmente.</div>
+      </div>
+      <div class="stack-item">
+        <div class="st-label">Hosting / CDN</div>
+        <div class="st-val">No determinado</div>
+        <div class="st-note">El sitio bloquea herramientas de fingerprinting con HTTP 403. Hosting no identificado.</div>
+      </div>
+      <div class="stack-item">
+        <div class="st-label">App Móvil</div>
+        <div class="st-val">Sin app nativa</div>
+        <div class="st-note">No existe en Google Play ni App Store. Opera exclusivamente vía web. Brecha crítica para el segmento retail.</div>
+      </div>
+    </div>
+
+    <div class="alert alert-green">
+      <div class="alert-icon">★</div>
+      <div><strong>Ventaja técnica probada:</strong> El mismo equipo fundador construyó la primera billetera electrónica de Mibanco en 2012. El back-office propio (no dependiente de proveedor externo) es lo que hace posible la velocidad de &lt;5 minutos — ventaja difícil de replicar para competidores que usan sistemas terceros.</div>
+    </div>
+
+    <div class="alert alert-yellow">
+      <div class="alert-icon">⚠</div>
+      <div><strong>Riesgo de concentración tecnológica:</strong> Al ser un equipo pequeño con desarrollo propio, un incidente de uptime o fallo en las APIs bancarias elimina instantáneamente la ventaja competitiva principal. Se recomienda plan de contingencia operacional documentado.</div>
+    </div>
+  </div>
+
+  <!-- ════ 4. ANÁLISIS COMPETITIVO ════ -->
+  <div class="section">
+    <div class="section-title"><span class="num">4</span> Análisis Competitivo</div>
+
     <div class="table-wrap">
-      <table>
+      <table class="comp">
         <thead>
           <tr>
             <th>Plataforma</th>
             <th>Fundación</th>
-            <th>Registro SBS</th>
-            <th>App Móvil</th>
+            <th>SBS</th>
+            <th>App</th>
+            <th>Volumen / Usuarios</th>
+            <th>Redes</th>
             <th>Fortaleza principal</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>Rextie</td>
+            <td><strong>Rextie</strong></td>
             <td>~2016</td>
-            <td>✅ Confirmado</td>
             <td>✅</td>
-            <td>Liderazgo, mayor base de usuarios</td>
+            <td>✅</td>
+            <td>US$ 4,000M/año · Líder empresas</td>
+            <td>IG · LI · YT · FB · TK</td>
+            <td>Liderazgo, 40% segmento corporativo</td>
           </tr>
           <tr>
-            <td>Tucambista</td>
-            <td>~2017</td>
-            <td>✅ Confirmado</td>
+            <td><strong>Kambista</strong></td>
+            <td>~2016</td>
             <td>✅</td>
+            <td>✅</td>
+            <td>US$ 631M en 2025 · 454K usuarios registrados</td>
+            <td>IG · LI · YT · FB</td>
+            <td>Primera online, marca consolidada</td>
+          </tr>
+          <tr>
+            <td><strong>Tucambista</strong></td>
+            <td>~2017</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>n/d</td>
+            <td>IG · LI · YT · FB</td>
             <td>Alta confianza, segmento retail</td>
           </tr>
           <tr>
-            <td>Kambista</td>
-            <td>~2016</td>
-            <td>✅ Confirmado</td>
-            <td>✅</td>
-            <td>Primera online, marca reconocida</td>
-          </tr>
-          <tr>
-            <td>Cambi</td>
+            <td><strong>Global66</strong></td>
             <td>~2019</td>
-            <td>✅ Confirmado</td>
             <td>✅</td>
-            <td>UX moderna</td>
+            <td>✅</td>
+            <td>Crece 3x en 2026</td>
+            <td>IG · LI · YT · TK</td>
+            <td>UX moderna, expansión regional</td>
           </tr>
           <tr class="highlight">
             <td><strong>Mercado Cambiario</strong></td>
             <td>2025</td>
-            <td>✅ 03053-2024</td>
+            <td>✅ 03053</td>
             <td>❌</td>
-            <td>Modelo marketplace innovador</td>
+            <td>350+ clientes activos</td>
+            <td>IG · LI · YT</td>
+            <td>Único marketplace con libro de órdenes</td>
           </tr>
         </tbody>
       </table>
     </div>
-    <div class="stat-box">
-      <span class="big">US$ 2,400M</span>
-      <span>anuales mueven más de 70 casas de cambio virtuales en Perú</span>
+
+    <div class="stat-row">
+      <div class="stat-box">
+        <span class="big">US$ 12,000M</span>
+        <span class="lbl">Mercado total de cambio de divisas en Perú (anual)</span>
+      </div>
+      <div class="stat-box">
+        <span class="big">99%</span>
+        <span class="lbl">Del mercado aún en manos de los bancos — por capturar</span>
+      </div>
+      <div class="stat-box">
+        <span class="big">1.24%</span>
+        <span class="lbl">Participación actual de todas las fintech juntas</span>
+      </div>
+      <div class="stat-box">
+        <span class="big">4x</span>
+        <span class="lbl">Mayor spread en bancos vs. fintech cambiarias</span>
+      </div>
     </div>
   </div>
 
-  <!-- ════ 4. FORTALEZAS ════ -->
+  <!-- ════ 5. FORTALEZAS ════ -->
   <div class="section">
-    <div class="section-title"><span class="num">4</span> Puntos Fuertes</div>
+    <div class="section-title"><span class="num">5</span> Puntos Fuertes</div>
     <div class="strengths">
       <div class="strength-item">
         <span class="icon">🏪</span>
-        <div><strong>Modelo diferenciado</strong>Marketplace todos contra todos, precio en tiempo real — difícil de replicar rápidamente.</div>
+        <div><strong>Modelo único en el mercado</strong>Único marketplace con libro de órdenes en tiempo real — las ~40 casas de cambio digitales son OTC (precio fijo). Ventaja estructural difícil de replicar.</div>
       </div>
       <div class="strength-item">
         <span class="icon">⚡</span>
-        <div><strong>Velocidad superior</strong>Menos de 5 min vs. 30–45 min de la competencia — ventaja operacional concreta.</div>
+        <div><strong>Velocidad operacional</strong>Menos de 5 min por operación vs. 30–45 min de la competencia. Ventaja concreta y medible, basada en back-office propio.</div>
       </div>
       <div class="strength-item">
         <span class="icon">🏦</span>
-        <div><strong>Equipo senior</strong>Fundadores con trayectorias en BCP y Mibanco — credibilidad y conocimiento del sector.</div>
+        <div><strong>Equipo fundador senior</strong>Tres cofundadores complementarios con 20–30 años en banca: negocio (Balbuena), productos digitales (Ortiz) y operaciones/sistemas (Agois).</div>
       </div>
       <div class="strength-item">
-        <span class="icon">💼</span>
-        <div><strong>Track record técnico</strong>Billetera electrónica de Mibanco (2012) — validador fuerte ante inversores.</div>
+        <span class="icon">👑</span>
+        <div><strong>Directorio de primer nivel</strong>Oscar Rivera (ex-ASBANC/FELABAN) y Francis Stenning (ex-CEO BVL). Credenciales institucionales únicas para una startup.</div>
+      </div>
+      <div class="strength-item">
+        <span class="icon">💡</span>
+        <div><strong>Track record técnico probado</strong>Billetera electrónica de Mibanco (2012). Validador fuerte ante inversores, socios bancarios y medios especializados.</div>
       </div>
       <div class="strength-item">
         <span class="icon">🔁</span>
-        <div><strong>Alta recurrencia</strong>Alta tasa de operaciones repetidas — señal de product-market fit temprano.</div>
+        <div><strong>Alta recurrencia de operaciones</strong>Alta tasa de transacciones repetidas — señal temprana de product-market fit y satisfacción del usuario.</div>
       </div>
       <div class="strength-item">
-        <span class="icon">📈</span>
-        <div><strong>350+ clientes activos</strong>A pocos meses del lanzamiento — ritmo de crecimiento inicial positivo.</div>
+        <span class="icon">📋</span>
+        <div><strong>Compliance regulatorio activo</strong>Registro SBS 03053-2024 publicado. Base para generar confianza institucional y escalar con respaldo regulatorio.</div>
+      </div>
+      <div class="strength-item">
+        <span class="icon">📱</span>
+        <div><strong>Canales digitales activos</strong>LinkedIn, Instagram y YouTube activos — base para construir comunidad y estrategia de contenido educativo.</div>
       </div>
     </div>
   </div>
 
-  <!-- ════ 5. MEJORAS ════ -->
+  <!-- ════ 6. PUNTOS A MEJORAR ════ -->
   <div class="section">
-    <div class="section-title"><span class="num">5</span> Puntos a Mejorar (Urgentes)</div>
+    <div class="section-title"><span class="num">6</span> Puntos a Mejorar (Urgentes)</div>
     <div class="cards">
 
       <div class="card card-red">
-        <div class="card-title">5.1 Presencia en comparadores</div>
-        <p><span class="label-gap">Problema:</span> No aparecen en comparaeldolar.com, miciudad.pe, cambioseguro.com.</p>
-        <p style="margin-top:8px"><strong>Acción:</strong> Gestionar alta. El tráfico referido desde comparadores es crítico en este nicho.</p>
+        <div class="card-title">6.1 Presencia en comparadores</div>
+        <p><span class="label-gap">Brecha crítica:</span> No aparecen en cuantoestaeldolar.pe, comparaeldolar.com, cambioseguro.com, miciudad.pe.</p>
+        <p style="margin-top:8px"><strong>Acción:</strong> Alta inmediata en estos directorios. El tráfico referido desde comparadores es la principal fuente de adquisición en este nicho.</p>
+      </div>
+
+      <div class="card card-red">
+        <div class="card-title">6.2 Volumen de reseñas Google</div>
+        <p><span class="label-gap">Problema:</span> Reseñas prácticamente inexistentes en Google Business. Rextie y Kambista tienen cientos.</p>
+        <p style="margin-top:8px"><strong>Acción:</strong> Programa activo de solicitud de reseñas a clientes satisfechos (post-operación, vía email/WhatsApp).</p>
       </div>
 
       <div class="card card-blue">
-        <div class="card-title">5.2 Señales de confianza</div>
-        <p><span class="label-ok">Ya está bien:</span> Registro SBS 03053-2024 en footer ✅ y Google Business activo ✅.</p>
-        <p style="margin-top:8px"><strong>Falta:</strong> Sello UIF, "Sobre Nosotros" con fotos del equipo, testimonios reales, FAQs de seguridad.</p>
+        <div class="card-title">6.3 Señales de confianza en el sitio</div>
+        <p><span class="label-ok">Ya bien:</span> SBS 03053-2024 en footer ✅, Google Business ✅.</p>
+        <p style="margin-top:8px"><strong>Falta:</strong> Publicar el directorio (Rivera, Stenning), sección "Sobre Nosotros" con fotos del equipo, testimonios reales, FAQs de seguridad, sello UIF visible.</p>
       </div>
 
       <div class="card card-orange">
-        <div class="card-title">5.3 SEO y Contenido</div>
-        <p><span class="label-gap">Problema:</span> Sin blog, sin contenido, sin backlinks = invisibilidad orgánica.</p>
-        <p style="margin-top:8px"><strong>Acción:</strong> Blog con tipo de cambio, tips, noticias financieras → tráfico orgánico sostenido.</p>
+        <div class="card-title">6.4 SEO y Contenido</div>
+        <p><span class="label-gap">Problema:</span> Sin blog, sin contenido, sin backlinks = invisibilidad orgánica total frente a la competencia.</p>
+        <p style="margin-top:8px"><strong>Acción:</strong> Blog con tipo de cambio diario, artículos sobre el modelo marketplace, tips para empresas. Target: 2 artículos semanales.</p>
       </div>
 
       <div class="card card-orange">
-        <div class="card-title">5.4 Redes Sociales</div>
-        <p><span class="label-gap">Problema:</span> Ausencia total o mínima en redes sociales.</p>
-        <p style="margin-top:8px"><strong>Acción:</strong> Instagram, LinkedIn y TikTok con contenido educativo. Reels/TikToks de 60–90s tienen alto alcance orgánico.</p>
+        <div class="card-title">6.5 Cadencia en Redes Sociales</div>
+        <p><span class="label-ok">Ya bien:</span> LinkedIn ✅, Instagram ✅, YouTube ✅ activos.</p>
+        <p style="margin-top:8px"><strong>Falta:</strong> Calendario editorial consistente. Activar TikTok para alcance masivo en retail. Reels explicando el modelo marketplace en 60–90s.</p>
       </div>
 
       <div class="card card-gray">
-        <div class="card-title">5.5 App Móvil</div>
-        <p><span class="label-gap">Problema:</span> Sin app nativa.</p>
-        <p style="margin-top:8px"><strong>Acción:</strong> PWA como paso intermedio. El mercado peruano opera masivamente desde móvil.</p>
+        <div class="card-title">6.6 App Móvil</div>
+        <p><span class="label-gap">Problema:</span> Sin app nativa. El mercado peruano opera masivamente desde móvil.</p>
+        <p style="margin-top:8px"><strong>Acción:</strong> PWA (Progressive Web App) como paso intermedio antes de app nativa en stores.</p>
       </div>
 
       <div class="card card-gray">
-        <div class="card-title">5.6 Bloqueo de Crawlers</div>
-        <p><span class="label-gap">Problema:</span> El sitio devuelve 403 a bots/crawlers — afecta indexación en Google.</p>
-        <p style="margin-top:8px"><strong>Acción:</strong> Revisar robots.txt y reglas de firewall para permitir Googlebot.</p>
+        <div class="card-title">6.7 Bloqueo de Crawlers</div>
+        <p><span class="label-gap">Problema:</span> HTTP 403 a bots puede impedir indexación de páginas por Google y análisis por herramientas legítimas.</p>
+        <p style="margin-top:8px"><strong>Acción:</strong> Revisar robots.txt y reglas de firewall. Asegurar Googlebot no esté bloqueado.</p>
+      </div>
+
+      <div class="card card-orange">
+        <div class="card-title">6.8 Visibilidad en Medios de Primer Nivel</div>
+        <p><span class="label-gap">Problema:</span> Sin cobertura en Gestión, El Comercio, RPP, Semana Económica. No aparece en rankings de fintech 2025.</p>
+        <p style="margin-top:8px"><strong>Acción:</strong> El directorio (Rivera, Stenning) facilita apertura de puertas con medios financieros especializados. Estrategia de PR activa.</p>
       </div>
 
     </div>
   </div>
 
-  <!-- ════ 6. OPORTUNIDADES ════ -->
+  <!-- ════ 7. OPORTUNIDADES ════ -->
   <div class="section">
-    <div class="section-title"><span class="num">6</span> Oportunidades</div>
+    <div class="section-title"><span class="num">7</span> Oportunidades</div>
     <div class="cards">
 
       <div class="card card-green">
-        <div class="card-title">6.1 Segmento B2B</div>
-        <p>Ticket promedio empresas: <strong>US$ 11,900</strong> vs. US$ 1,300 en retail (~9x). Producto para tesorería corporativa con API, dashboard multi-usuario y reportes tributarios.</p>
+        <div class="card-title">7.1 Mercado con 99% por Capturar</div>
+        <p>El mercado total es US$12,000M anuales y los bancos controlan el 99%. Las fintech solo capturan el 1.24% y el spread bancario es 4x mayor. El potencial de crecimiento es estructuralmente inmenso.</p>
+      </div>
+
+      <div class="card card-yellow">
+        <div class="card-title">7.2 Elecciones 2026 — Catalizador de Demanda</div>
+        <p>Elecciones generales el <strong>12 de abril de 2026</strong>. La incertidumbre electoral históricamente dispara la demanda de dólares como cobertura. Más volumen transaccional = más oportunidad para el marketplace.</p>
       </div>
 
       <div class="card card-green">
-        <div class="card-title">6.2 Integración SUNAT</div>
-        <p>Reportes automáticos de operaciones (tipo de cambio oficial, ITF) — diferenciador enorme para empresas y contadores.</p>
+        <div class="card-title">7.3 Plan Interoperabilidad BCRP (Fase 4)</div>
+        <p>Vigente desde abril 2026 (Circular N° 0022-2025-BCRP). Incorpora fintech como iniciadores de pago (PSIP). Abre puerta a integraciones con <strong>Yape (10M+ usuarios), Plin y otros wallets</strong> masivos.</p>
       </div>
 
       <div class="card card-green">
-        <div class="card-title">6.3 Educación financiera</div>
-        <p>Gran mercado informal de cambio en la calle. YouTube/TikTok para educar y convertir ese mercado al canal digital.</p>
+        <div class="card-title">7.4 Sandbox Regulatorio Ampliado</div>
+        <p>Resolución SBS N° 04142-2025: permite probar modelos innovadores sin autorización previa. Mercado Cambiario puede iterar producto con menor riesgo regulatorio en esta etapa.</p>
       </div>
 
       <div class="card card-green">
-        <div class="card-title">6.4 Alianzas estratégicas</div>
-        <p>Integración con Alegra, Concar, Yape, BIM, plataformas e-commerce peruanas para adopción masiva.</p>
+        <div class="card-title">7.5 Segmento B2B (Tesorería Corporativa)</div>
+        <p>Ticket promedio empresas: <strong>US$11,900</strong> vs. US$1,300 retail (~9x). Rextie captura el 40% del segmento corporativo. Espacio para un competidor con modelo de precios más transparente.</p>
       </div>
 
       <div class="card card-green">
-        <div class="card-title">6.5 Expansión regional</div>
-        <p>El modelo replica en Colombia, Chile, Bolivia — mercados con alta dolarización y poco desarrollo en exchange digital.</p>
+        <div class="card-title">7.6 Integración SUNAT / Tributación</div>
+        <p>Reportes automáticos de operaciones en formato SUNAT (tipo de cambio oficial, ITF). Diferenciador enorme para empresas y contadores que necesitan compliance tributario.</p>
       </div>
 
       <div class="card card-green">
-        <div class="card-title">6.6 API pública + Post-pandemia</div>
-        <p>API de tipo de cambio en tiempo real para terceros. El mercado online pasó del 11% al doble post-pandemia y sigue en expansión.</p>
+        <div class="card-title">7.7 IA Aplicada al Tipo de Cambio</div>
+        <p>Rextie ya implementa IA para predicción de tipo de cambio en 2025. Oportunidad para diferenciarse con algoritmos de matching inteligente y pricing dinámico en el libro de órdenes.</p>
+      </div>
+
+      <div class="card card-green">
+        <div class="card-title">7.8 Expansión Regional</div>
+        <p>El modelo marketplace replica en Colombia, Chile, Bolivia — mercados con alta dolarización parcial y poco desarrollo en exchange digital de tipo marketplace.</p>
       </div>
 
     </div>
   </div>
 
-  <!-- ════ 7. DESAFÍOS ════ -->
+  <!-- ════ 8. DESAFÍOS ════ -->
   <div class="section">
-    <div class="section-title"><span class="num">7</span> Desafíos</div>
+    <div class="section-title"><span class="num">8</span> Desafíos</div>
     <ul class="bullets">
-      <li><strong>Credibilidad vs. incumbentes:</strong> Rextie, Tucambista y Kambista llevan 7–10 años con miles de reseñas y contratos corporativos. Competir frontalmente es costoso.</li>
-      <li><strong>CAC elevado:</strong> El costo de adquisición en fintech es alto. Sin capital de marketing, el crecimiento orgánico puede ser lento.</li>
-      <li><strong>Liquidez del marketplace:</strong> Requiere masa crítica en compradores Y vendedores. Sin volumen, el precio no se forma eficientemente.</li>
-      <li><strong>Educación del usuario:</strong> "Marketplace de divisas" es más complejo de explicar que "te cambio soles por dólares".</li>
-      <li><strong>Dependencia tecnológica:</strong> La ventaja de 5 minutos es tecnológica — un incidente de uptime o fallo en APIs bancarias la elimina instantáneamente.</li>
+      <li><strong>Educación del usuario sobre el modelo marketplace:</strong> "Marketplace de divisas" es más complejo de explicar que "te cambio soles por dólares". Los usuarios deben entender el libro de órdenes y la dinámica de matching. El CEO lo reconoce como el principal reto comunicacional. La curva de adopción es más larga que para una OTC.</li>
+      <li><strong>Liquidez del libro de órdenes:</strong> El modelo marketplace requiere masa crítica en compradores Y vendedores simultáneamente. Con 350 clientes activos, el libro puede ser delgado. Si no hay suficientes contrapartes, las órdenes no se casan y la propuesta de valor colapsa.</li>
+      <li><strong>Credibilidad vs. incumbentes:</strong> Rextie (US$4,000M/año, 9 años) y Kambista (454K usuarios, 9 años) tienen reputación consolidada. El CEO de Kambista reconoció que la confianza fue su principal barrera inicial. Para un modelo más complejo, la curva es aún más larga.</li>
+      <li><strong>Acceso a servicios bancarios:</strong> Los bancos frecuentemente niegan o cierran cuentas a fintech sin justificación clara, alegando riesgos AML. Sin cuentas bancarias, la liquidación en &lt;5 minutos no es posible — obstáculo operacional crítico para nuevos entrantes.</li>
+      <li><strong>Compliance UIF en escala:</strong> El costo de KYC, AML, reportes RO/ROS y Oficial de Cumplimiento crece conforme escala el volumen. La normativa se amplía constantemente. Las empresas pequeñas tienen menor capacidad para absorberlo.</li>
+      <li><strong>CAC elevado sin capital de marketing:</strong> El Costo de Adquisición de Cliente en fintech es alto. Sin presupuesto de marketing significativo, el crecimiento orgánico puede ser lento frente a competidores con recursos establecidos.</li>
+      <li><strong>Dependencia tecnológica concentrada:</strong> La ventaja de los &lt;5 minutos es tecnológica y propia. Un incidente de uptime o fallo en las APIs bancarias elimina instantáneamente esa ventaja competitiva diferencial.</li>
     </ul>
   </div>
 
-  <!-- ════ 8. RIESGOS ════ -->
+  <!-- ════ 9. RIESGOS ════ -->
   <div class="section">
-    <div class="section-title"><span class="num">8</span> Riesgos</div>
-    <div class="cards">
+    <div class="section-title"><span class="num">9</span> Matriz de Riesgos</div>
 
-      <div class="card card-green">
-        <div class="card-title">8.1 Riesgo Regulatorio — MITIGADO ✅</div>
-        <p>Registro SBS 03053-2024 confirmado y publicado. <strong>Pendiente:</strong> mantener obligaciones UIF y renovaciones conforme escale el volumen.</p>
-      </div>
-
-      <div class="card card-orange">
-        <div class="card-title">8.2 Lavado de Activos</div>
-        <p>Casas de cambio son objetivo de la UIF. Sin protocolos KYC/AML robustos, la plataforma queda expuesta a sanciones severas.</p>
-      </div>
-
-      <div class="card card-orange">
-        <div class="card-title">8.3 Fraude / Ciberseguridad</div>
-        <p>Plataformas fintech nuevas son objetivos frecuentes de phishing e ingeniería social. Sin 2FA y certificaciones visibles, la fricción aumenta.</p>
-      </div>
-
-      <div class="card card-orange">
-        <div class="card-title">8.4 Liquidez de Mercado</div>
-        <p>En alta volatilidad cambiaria (frecuente en Perú), el marketplace puede quedarse sin liquidez en un lado, bloqueando operaciones.</p>
-      </div>
-
-      <div class="card card-red">
-        <div class="card-title">8.5 Riesgo de Imitación</div>
-        <p>Rextie y Tucambista tienen recursos para copiar el modelo marketplace en meses si ven tracción real.</p>
-      </div>
-
-      <div class="card card-red">
-        <div class="card-title">8.6 Reputación Temprana</div>
-        <p>Con 350 clientes activos, una experiencia negativa viral puede afectar desproporcionadamente la percepción de marca.</p>
-      </div>
-
+    <div class="table-wrap">
+      <table class="risk-table">
+        <thead>
+          <tr>
+            <th>Riesgo</th>
+            <th>Nivel</th>
+            <th>Descripción e impacto</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Electoral 2026</strong></td>
+            <td><span class="risk-level risk-alto">ALTO</span></td>
+            <td>Elecciones el 12 de abril de 2026. En escenario de candidato populista, dólar puede superar S/ 4.00 → alta volatilidad → riesgo de liquidez en un solo lado del libro. En escenario moderado, el aumento de volumen es positivo.</td>
+          </tr>
+          <tr>
+            <td><strong>Regulatorio / UIF</strong></td>
+            <td><span class="risk-level risk-medio">MEDIO</span></td>
+            <td>✅ Registro SBS confirmado. Riesgo residual: incumplimiento de SIPLAFT, reportes RO/ROS o Ley N° 32209. La SBS puede ordenar bloqueo de plataforma. El costo de compliance aumenta con el volumen.</td>
+          </tr>
+          <tr>
+            <td><strong>Liquidez del libro</strong></td>
+            <td><span class="risk-level risk-critico">CRÍTICO</span></td>
+            <td>Con 350 clientes activos, el libro de órdenes puede ser demasiado delgado. Sin masa crítica en ambos lados (compra Y venta), el precio no se forma y la propuesta de valor diferencial se destruye completamente.</td>
+          </tr>
+          <tr>
+            <td><strong>Lavado de activos / Fraude</strong></td>
+            <td><span class="risk-level risk-alto">ALTO</span></td>
+            <td>Velocidad de &lt;5 min reduce la ventana para detección de anomalías. Una sola operación vinculada a lavado puede desencadenar intervención de la UIF y cierre de plataforma. Caso documentado en Perú: fintech sancionada por falta de verificación de identidad.</td>
+          </tr>
+          <tr>
+            <td><strong>Imitación por incumbentes</strong></td>
+            <td><span class="risk-level risk-medio">MEDIO</span></td>
+            <td>Rextie y Kambista tienen recursos para desarrollar un módulo marketplace en meses si detectan tracción real. La ventaja de ser primero es temporal si no se consolida la base de usuarios.</td>
+          </tr>
+          <tr>
+            <td><strong>Bancos digitales</strong></td>
+            <td><span class="risk-level risk-medio">MEDIO</span></td>
+            <td>BCP (Yape: 10M+ usuarios), BBVA e Interbank construyen capacidades de cambio de divisas en sus apps. Si alcanzan spreads competitivos con distribución masiva, el mercado addressable para fintechs independientes se reduce.</td>
+          </tr>
+          <tr>
+            <td><strong>Acceso bancario</strong></td>
+            <td><span class="risk-level risk-alto">ALTO</span></td>
+            <td>Cierre de cuentas bancarias por parte de bancos (alegando AML sin debida diligencia específica) = paralización operacional inmediata. Obstáculo estructural documentado en el sector fintech peruano.</td>
+          </tr>
+          <tr>
+            <td><strong>Reputación temprana</strong></td>
+            <td><span class="risk-level risk-medio">MEDIO</span></td>
+            <td>Con 350 clientes activos, una experiencia negativa viral puede afectar desproporcionadamente la percepción de marca. Sin volumen de reseñas positivas como contrapeso, el daño es mayor.</td>
+          </tr>
+          <tr>
+            <td><strong>Clima / Niño Costero 2026</strong></td>
+            <td><span class="risk-level risk-bajo">BAJO</span></td>
+            <td>Fenómeno identificado como factor de desaceleración económica en 2026. Reduce volumen de transacciones empresariales en general.</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 
-  <!-- ════ 9. ROADMAP ════ -->
+  <!-- ════ 10. ROADMAP ════ -->
   <div class="section">
-    <div class="section-title"><span class="num">9</span> Recomendaciones Prioritarias — Roadmap 90 días</div>
+    <div class="section-title"><span class="num">10</span> Recomendaciones Prioritarias — Roadmap 90 días</div>
     <div class="roadmap">
 
       <div class="roadmap-row done">
         <div><span class="badge badge-done">✅ Hecho</span></div>
-        <div class="roadmap-action">Registro SBS 03053-2024 publicado en footer</div>
-        <div class="roadmap-impact">Confianza</div>
-        <div class="roadmap-effort">—</div>
+        <div class="roadmap-action">Registro SBS 03053-2024 publicado en footer del sitio</div>
+        <div class="roadmap-impact">Confianza regulatoria</div>
+        <div class="roadmap-effort">Esfuerzo: —</div>
       </div>
 
       <div class="roadmap-row done">
         <div><span class="badge badge-done">✅ Hecho</span></div>
         <div class="roadmap-action">Google Business Profile activo en Google Maps</div>
         <div class="roadmap-impact">SEO local</div>
-        <div class="roadmap-effort">—</div>
+        <div class="roadmap-effort">Esfuerzo: —</div>
+      </div>
+
+      <div class="roadmap-row done">
+        <div><span class="badge badge-done">✅ Hecho</span></div>
+        <div class="roadmap-action">LinkedIn, Instagram y YouTube activos como Mercado Cambiario</div>
+        <div class="roadmap-impact">Marca digital</div>
+        <div class="roadmap-effort">Esfuerzo: —</div>
       </div>
 
       <div class="roadmap-row red">
         <div><span class="badge badge-red">🔴 Crítico</span></div>
-        <div class="roadmap-action">Aparecer en cuantoestaeldolar.pe, cambioseguro.com y otros comparadores</div>
-        <div class="roadmap-impact">Tráfico</div>
+        <div class="roadmap-action">Alta en cuantoestaeldolar.pe, comparaeldolar.com, cambioseguro.com, miciudad.pe</div>
+        <div class="roadmap-impact">Tráfico referido</div>
         <div class="roadmap-effort">Esfuerzo: Bajo</div>
       </div>
 
       <div class="roadmap-row red">
         <div><span class="badge badge-red">🔴 Crítico</span></div>
-        <div class="roadmap-action">Escalar reseñas en Google Business Profile (pedir activamente a clientes)</div>
-        <div class="roadmap-impact">Confianza</div>
+        <div class="roadmap-action">Escalar reseñas en Google Business Profile (solicitud post-operación por email/WhatsApp)</div>
+        <div class="roadmap-impact">Confianza y conversión</div>
+        <div class="roadmap-effort">Esfuerzo: Bajo</div>
+      </div>
+
+      <div class="roadmap-row red">
+        <div><span class="badge badge-red">🔴 Crítico</span></div>
+        <div class="roadmap-action">Publicar equipo y directorio (Rivera, Stenning) en sección "Sobre Nosotros" del sitio</div>
+        <div class="roadmap-impact">Confianza institucional</div>
         <div class="roadmap-effort">Esfuerzo: Bajo</div>
       </div>
 
       <div class="roadmap-row orange">
         <div><span class="badge badge-orange">🟠 Alto</span></div>
-        <div class="roadmap-action">Lanzar blog con contenido de tipo de cambio</div>
+        <div class="roadmap-action">Establecer calendario editorial en LinkedIn + Instagram + YouTube (mínimo 3 posts/semana)</div>
+        <div class="roadmap-impact">Comunidad y marca</div>
+        <div class="roadmap-effort">Esfuerzo: Medio</div>
+      </div>
+
+      <div class="roadmap-row orange">
+        <div><span class="badge badge-orange">🟠 Alto</span></div>
+        <div class="roadmap-action">Lanzar TikTok con Reels explicativos del modelo marketplace (60–90s)</div>
+        <div class="roadmap-impact">Alcance masivo retail</div>
+        <div class="roadmap-effort">Esfuerzo: Medio</div>
+      </div>
+
+      <div class="roadmap-row orange">
+        <div><span class="badge badge-orange">🟠 Alto</span></div>
+        <div class="roadmap-action">Lanzar blog con tipo de cambio diario + artículos educativos sobre el marketplace</div>
         <div class="roadmap-impact">SEO orgánico</div>
         <div class="roadmap-effort">Esfuerzo: Medio</div>
       </div>
 
       <div class="roadmap-row orange">
         <div><span class="badge badge-orange">🟠 Alto</span></div>
-        <div class="roadmap-action">Activar LinkedIn + Instagram con contenido educativo</div>
-        <div class="roadmap-impact">Marca</div>
+        <div class="roadmap-action">Estrategia de PR hacia Gestión, Semana Económica y RPP (usar directorio como palanca)</div>
+        <div class="roadmap-impact">Visibilidad y credibilidad</div>
         <div class="roadmap-effort">Esfuerzo: Medio</div>
       </div>
 
       <div class="roadmap-row orange">
         <div><span class="badge badge-orange">🟠 Alto</span></div>
+        <div class="roadmap-action">Revisar robots.txt y firewall para permitir Googlebot (corregir HTTP 403)</div>
+        <div class="roadmap-impact">Indexación SEO</div>
+        <div class="roadmap-effort">Esfuerzo: Bajo</div>
+      </div>
+
+      <div class="roadmap-row yellow">
+        <div><span class="badge badge-yellow">🟡 Medio</span></div>
         <div class="roadmap-action">Desarrollar PWA o versión mobile optimizada</div>
-        <div class="roadmap-impact">Conversión</div>
+        <div class="roadmap-impact">Conversión mobile</div>
         <div class="roadmap-effort">Esfuerzo: Alto</div>
       </div>
 
       <div class="roadmap-row yellow">
         <div><span class="badge badge-yellow">🟡 Medio</span></div>
-        <div class="roadmap-action">Implementar programa de referidos</div>
-        <div class="roadmap-impact">CAC</div>
+        <div class="roadmap-action">Implementar programa de referidos (cliente refiere → descuento en próxima operación)</div>
+        <div class="roadmap-impact">Reducción CAC</div>
         <div class="roadmap-effort">Esfuerzo: Medio</div>
       </div>
 
       <div class="roadmap-row yellow">
         <div><span class="badge badge-yellow">🟡 Medio</span></div>
-        <div class="roadmap-action">Lanzar producto B2B (tesorería corporativa)</div>
-        <div class="roadmap-impact">Ticket</div>
+        <div class="roadmap-action">Lanzar producto B2B para tesorería corporativa (dashboard multi-usuario + API)</div>
+        <div class="roadmap-impact">Ticket promedio 9x</div>
         <div class="roadmap-effort">Esfuerzo: Alto</div>
       </div>
 
       <div class="roadmap-row yellow">
         <div><span class="badge badge-yellow">🟡 Medio</span></div>
-        <div class="roadmap-action">Integrar reportes SUNAT automáticos</div>
-        <div class="roadmap-impact">Retención</div>
+        <div class="roadmap-action">Integrar reportes automáticos en formato SUNAT (tipo de cambio oficial, ITF)</div>
+        <div class="roadmap-impact">Retención B2B</div>
         <div class="roadmap-effort">Esfuerzo: Alto</div>
       </div>
 
       <div class="roadmap-row green">
         <div><span class="badge badge-green">🟢 Largo plazo</span></div>
-        <div class="roadmap-action">API pública de tipo de cambio</div>
+        <div class="roadmap-action">Integración con BCRP Fase 4 (Yape/Plin como canal de adquisición masiva)</div>
+        <div class="roadmap-impact">Escala masiva</div>
+        <div class="roadmap-effort">Esfuerzo: Alto</div>
+      </div>
+
+      <div class="roadmap-row green">
+        <div><span class="badge badge-green">🟢 Largo plazo</span></div>
+        <div class="roadmap-action">API pública de tipo de cambio en tiempo real para terceros (desarrolladores, apps)</div>
         <div class="roadmap-impact">Ecosistema</div>
         <div class="roadmap-effort">Esfuerzo: Alto</div>
       </div>
@@ -713,19 +1053,19 @@
     </div>
   </div>
 
-  <!-- ════ 10. CONCLUSIÓN ════ -->
+  <!-- ════ 11. CONCLUSIÓN ════ -->
   <div class="conclusion">
-    <h2>10. Conclusión</h2>
-    <p><strong>Mercado Cambiario</strong> tiene una propuesta de valor genuinamente diferenciada (marketplace en tiempo real, 5 minutos de operación) y un equipo fundador con credenciales sólidas. Las bases regulatorias y de confianza están bien establecidas: registro SBS <strong>03053-2024</strong> publicado en el footer y Google Business Profile activo.</p>
-    <p>Sin embargo, la presencia digital en otros frentes sigue siendo incipiente: sin SEO consolidado, sin comunidad activa en redes sociales y sin app móvil.</p>
-    <p>El mayor desafío en el corto plazo es la <strong>visibilidad y el volumen de reseñas</strong>. En fintech, el usuario no prueba lo que no conoce — y compara cantidad de reviews antes de decidir.</p>
-    <p>Con inversión focalizada en los puntos pendientes (presencia en comparadores, contenido educativo, crecimiento de reseñas en Google), la empresa tiene bases sólidas para escalar en un mercado de +US$ 2,400M con altísimo potencial de digitalización.</p>
+    <h2>11. Conclusión</h2>
+    <p><strong>Mercado Cambiario</strong> tiene los ingredientes para convertirse en un actor relevante del sector fintech cambiario peruano: el único modelo marketplace con libro de órdenes en un mercado de ~40 plataformas OTC, un equipo cofundador con 20–30 años de banca (BCP, Mibanco, Banco Santander) y un directorio institucional extraordinario — <strong>ex-presidente de ASBANC/FELABAN y ex-CEO de la Bolsa de Valores de Lima</strong>. Estas credenciales son únicas para una startup de este tamaño y etapa.</p>
+    <p>El mercado disponible es estructuralmente inmenso: <strong>US$12,000 millones anuales</strong> con el 99% aún en manos de los bancos, y un spread 4 veces mayor al de las fintech. El ecosistema regulatorio (sandbox SBS, interoperabilidad BCRP Fase 4) y el ciclo electoral 2026 generan condiciones favorables para crecer.</p>
+    <p>Los dos riesgos más inmediatos no son tecnológicos ni regulatorios: son <strong>liquidez del libro de órdenes</strong> (necesita masa crítica en ambos lados) y <strong>visibilidad</strong> (LinkedIn, Instagram y YouTube están activos, pero se necesita cadencia de contenido + TikTok + presencia en comparadores + medios de primer nivel). El directorio (Rivera, Stenning) es un activo completamente subutilizado: no aparece en el sitio ni en comunicaciones — mostrarlo públicamente sería el diferenciador de confianza más inmediato y de menor costo de implementar.</p>
+    <p>Con ejecución focalizada en los puntos críticos (comparadores, reseñas, directorio visible, cadencia de contenido) y aprovechando el viento a favor de las elecciones 2026, el próximo año es la <strong>ventana de oportunidad crítica</strong> para consolidar posición antes de que los incumbentes repliquen el modelo.</p>
   </div>
 
 </div>
 
 <footer>
-  Fuentes: Startups Latam · Gestión PE · Tucambista Blog · SBS Peru · Comparaeldolar.com · CambioSeguro.com · Rextie Blog
+  Fuentes: Startups Latam · Odoo Customer Cases · Gestión PE · Kambista Blog · Rextie Blog · Tucambista Blog · SBS Peru · Chambers &amp; Partners Fintech Peru 2025 · EY Guía Fintech Perú 2024/2025 · BCRP · Infobae Perú · SURA Investments · CEPEG · ESAN · Infomercado
 </footer>
 
 </body>
