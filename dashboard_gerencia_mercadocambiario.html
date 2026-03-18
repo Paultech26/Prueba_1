@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard Gerencial — Mercado Cambiario</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #0f3460;
+      --navy2:  #16213e;
+      --red:    #e94560;
+      --gold:   #f39c12;
+      --green:  #27ae60;
+      --orange: #e67e22;
+      --gray:   #f0f2f5;
+      --text:   #1a1a2e;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--gray);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    /* ── COVER ── */
+    .cover {
+      background: linear-gradient(135deg, #0f3460 0%, #16213e 55%, #0d1b2a 100%);
+      color: #fff;
+      padding: 52px 48px 56px;
+      position: relative;
+      overflow: hidden;
+    }
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -100px; right: -100px;
+      width: 420px; height: 420px;
+      border-radius: 50%;
+      background: rgba(233,69,96,.07);
+    }
+    .cover::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0; right: 0;
+      height: 44px;
+      background: var(--gray);
+      clip-path: ellipse(55% 100% at 50% 100%);
+    }
+    .cover-eyebrow {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 14px;
+    }
+    .cover h1 {
+      font-size: 34px;
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+    .cover h1 span { color: var(--red); }
+    .cover-sub {
+      font-size: 15px;
+      color: #a0b4cc;
+      margin-bottom: 28px;
+    }
+    .cover-pills {
+      display: flex; flex-wrap: wrap; gap: 10px;
+    }
+    .cover-pill {
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 20px;
+      padding: 5px 16px;
+      font-size: 12px;
+      color: #d0e0f0;
+    }
+
+    /* ── GRID LAYOUT ── */
+    .wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 36px 20px 80px;
+    }
+    .section-label {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin: 36px 0 14px;
+    }
+
+    /* ── KPI STRIP ── */
+    .kpi-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 10px;
+    }
+    @media (max-width: 700px) { .kpi-strip { grid-template-columns: 1fr 1fr; } }
+    .kpi {
+      background: #fff;
+      border-radius: 14px;
+      padding: 22px 20px 18px;
+      text-align: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,.05);
+      border-top: 4px solid var(--navy);
+    }
+    .kpi.red    { border-top-color: var(--red); }
+    .kpi.gold   { border-top-color: var(--gold); }
+    .kpi.green  { border-top-color: var(--green); }
+    .kpi.orange { border-top-color: var(--orange); }
+    .kpi-val {
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--navy);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .kpi.red    .kpi-val { color: var(--red); }
+    .kpi.gold   .kpi-val { color: var(--gold); }
+    .kpi.green  .kpi-val { color: var(--green); }
+    .kpi.orange .kpi-val { color: var(--orange); }
+    .kpi-label { font-size: 11px; color: #888; font-weight: 500; line-height: 1.4; }
+
+    /* ── 2-COL ROW ── */
+    .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+    .row-65 { display: grid; grid-template-columns: 1.7fr 1fr; gap: 16px; }
+    @media (max-width: 640px) { .row2, .row3, .row-65 { grid-template-columns: 1fr; } }
+
+    /* ── CARD BASE ── */
+    .card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 26px 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.05);
+    }
+    .card-head {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--navy);
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #eee;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .card-head .ico { font-size: 18px; }
+
+    /* ── SEMAFORO PRESENCIA DIGITAL ── */
+    .semaforo-list { display: flex; flex-direction: column; gap: 10px; }
+    .semaforo-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 14px;
+      background: var(--gray);
+      border-radius: 8px;
+      font-size: 13px;
+    }
+    .semaforo-row .s-label { font-weight: 600; color: var(--text); }
+    .semaforo-row .s-detail { font-size: 11px; color: #888; margin-top: 1px; }
+    .s-dot {
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .s-ok     { background: var(--green); box-shadow: 0 0 0 3px rgba(39,174,96,.2); }
+    .s-warn   { background: var(--gold); box-shadow: 0 0 0 3px rgba(243,156,18,.2); }
+    .s-bad    { background: var(--red); box-shadow: 0 0 0 3px rgba(233,69,96,.2); }
+
+    /* ── MERCADO FUNNEL ── */
+    .funnel {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 4px;
+    }
+    .funnel-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 12px;
+    }
+    .funnel-bar .f-label { width: 120px; text-align: right; font-weight: 600; color: #555; flex-shrink: 0; }
+    .funnel-bar .f-track { flex: 1; background: #eee; border-radius: 4px; height: 28px; position: relative; overflow: hidden; }
+    .funnel-bar .f-fill  { height: 100%; border-radius: 4px; display: flex; align-items: center; justify-content: flex-end; padding-right: 10px; font-size: 11px; font-weight: 700; color: #fff; transition: width .6s ease; }
+    .f-navy   { background: var(--navy); }
+    .f-red    { background: var(--red); }
+    .f-green  { background: var(--green); }
+    .f-gold   { background: var(--gold); }
+
+    /* ── RRSS GRID ── */
+    .rrss-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    @media (max-width: 640px) { .rrss-grid { grid-template-columns: 1fr 1fr; } }
+    .rrss-item {
+      border-radius: 10px;
+      padding: 14px 12px;
+      text-align: center;
+      font-size: 12px;
+    }
+    .rrss-item .r-ico { font-size: 28px; margin-bottom: 6px; }
+    .rrss-item .r-name { font-weight: 700; font-size: 13px; margin-bottom: 4px; }
+    .rrss-item .r-status { font-size: 11px; font-weight: 600; }
+    .rrss-ok   { background: #eafaf1; border: 1.5px solid #82d9a5; }
+    .rrss-ok .r-status { color: #1a7a4a; }
+    .rrss-bad  { background: #fdecea; border: 1.5px solid #e8a9a2; }
+    .rrss-bad .r-status { color: #c0392b; }
+    .rrss-warn { background: #fef3e2; border: 1.5px solid #f0c87a; }
+    .rrss-warn .r-status { color: #b7770d; }
+
+    /* ── EQUIPO ── */
+    .team-grid {
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .team-row {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 12px;
+      background: var(--gray);
+      border-radius: 10px;
+    }
+    .team-avatar {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .av-navy  { background: #d0dff5; }
+    .av-gold  { background: #fef3e2; }
+    .team-name { font-weight: 700; font-size: 13px; color: var(--navy); }
+    .team-role { font-size: 11px; color: var(--red); font-weight: 600; }
+    .team-bio  { font-size: 11px; color: #666; margin-top: 3px; }
+
+    /* ── DIRECTORIO ── */
+    .board-row {
+      border-left: 4px solid var(--gold);
+      padding: 12px 16px;
+      background: #fffde7;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 8px;
+    }
+    .board-name { font-weight: 700; font-size: 13px; color: var(--navy); }
+    .board-role { font-size: 11px; color: #b7770d; font-weight: 600; margin-bottom: 3px; }
+    .board-bio  { font-size: 11px; color: #666; }
+
+    /* ── STACK ── */
+    .stack-list { display: flex; flex-direction: column; gap: 8px; }
+    .stack-row {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 11px 14px;
+      background: var(--gray);
+      border-radius: 8px;
+      font-size: 12px;
+    }
+    .stack-ico { font-size: 20px; flex-shrink: 0; }
+    .stack-key { font-weight: 700; color: var(--navy); font-size: 12px; }
+    .stack-val { color: #444; }
+
+    /* ── OPORTUNIDADES ── */
+    .opp-list { display: flex; flex-direction: column; gap: 10px; }
+    .opp-row {
+      display: flex; gap: 12px; align-items: flex-start;
+      padding: 12px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+    }
+    .opp-num {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 12px;
+      flex-shrink: 0;
+    }
+    .opp-a { background: #eafaf1; }
+    .opp-a .opp-num { background: var(--green); color: #fff; }
+    .opp-b { background: #fffde7; }
+    .opp-b .opp-num { background: var(--gold); color: #fff; }
+    .opp-c { background: #eaf2fb; }
+    .opp-c .opp-num { background: var(--navy); color: #fff; }
+    .opp-title { font-weight: 700; color: var(--text); margin-bottom: 2px; font-size: 13px; }
+    .opp-desc  { font-size: 12px; color: #666; }
+
+    /* ── RISK MATRIX ── */
+    .risk-list { display: flex; flex-direction: column; gap: 8px; }
+    .risk-row {
+      display: flex; align-items: center; gap: 12px;
+      padding: 11px 14px;
+      border-radius: 8px;
+      background: var(--gray);
+      font-size: 13px;
+    }
+    .risk-badge {
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 10px;
+      font-weight: 800;
+      text-align: center;
+      white-space: nowrap;
+      min-width: 62px;
+    }
+    .rb-critico { background: #c0392b; color: #fff; }
+    .rb-alto    { background: #e74c3c; color: #fff; }
+    .rb-medio   { background: var(--gold); color: #fff; }
+    .rb-bajo    { background: var(--green); color: #fff; }
+    .risk-text { font-weight: 600; color: var(--text); }
+    .risk-desc { font-size: 11px; color: #777; }
+
+    /* ── ROADMAP ── */
+    .roadmap-list { display: flex; flex-direction: column; gap: 6px; }
+    .rm-row {
+      display: grid;
+      grid-template-columns: 96px 1fr 100px;
+      gap: 10px;
+      align-items: center;
+      padding: 11px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+    }
+    .rm-done   { background: #eafaf1; }
+    .rm-red    { background: #fdecea; }
+    .rm-orange { background: #fef3e2; }
+    .rm-yellow { background: #fffde7; }
+    .rm-blue   { background: #eaf2fb; }
+    .rm-badge {
+      display: inline-block;
+      padding: 3px 9px;
+      border-radius: 12px;
+      font-size: 10px;
+      font-weight: 800;
+      text-align: center;
+    }
+    .bm-done   { background: #1a7a4a; color: #fff; }
+    .bm-red    { background: #c0392b; color: #fff; }
+    .bm-orange { background: var(--orange); color: #fff; }
+    .bm-yellow { background: var(--gold); color: #fff; }
+    .bm-blue   { background: var(--navy); color: #fff; }
+    .rm-action { font-weight: 600; color: var(--text); }
+    .rm-impact { font-size: 11px; color: #888; }
+
+    /* ── COMPETIDORES ── */
+    .comp-list { display: flex; flex-direction: column; gap: 8px; }
+    .comp-row  {
+      display: flex; align-items: center; gap: 12px;
+      padding: 11px 14px;
+      background: var(--gray);
+      border-radius: 8px;
+      font-size: 12px;
+    }
+    .comp-row.me { background: #fff3cd; border: 1.5px solid #ffd97d; }
+    .comp-name { font-weight: 700; color: var(--navy); width: 130px; flex-shrink: 0; font-size: 13px; }
+    .comp-bar-wrap { flex: 1; background: #ddd; border-radius: 4px; height: 12px; overflow: hidden; }
+    .comp-bar-fill { height: 100%; border-radius: 4px; background: var(--navy); }
+    .comp-row.me .comp-bar-fill { background: var(--red); }
+    .comp-val { font-size: 11px; color: #666; width: 110px; text-align: right; flex-shrink: 0; }
+
+    /* ── CONCLUSION BOX ── */
+    .concl {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+      border-radius: 14px;
+      padding: 36px 32px;
+      color: #fff;
+      margin-top: 10px;
+    }
+    .concl h2 { font-size: 20px; font-weight: 900; color: var(--red); margin-bottom: 18px; }
+    .concl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media (max-width: 640px) { .concl-grid { grid-template-columns: 1fr; } }
+    .concl-col h3 { font-size: 12px; font-weight: 700; color: #7db8e0; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+    .concl-col ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 7px; }
+    .concl-col ul li { font-size: 13px; color: #cdd8e5; padding-left: 18px; position: relative; line-height: 1.5; }
+    .concl-col ul li::before { content: '→'; position: absolute; left: 0; color: var(--red); font-weight: 700; }
+    .concl-col ul li strong { color: #fff; }
+    .concl-footer { margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.1); font-size: 12px; color: #7db8e0; }
+
+    /* ── FOOTER ── */
+    footer { text-align: center; font-size: 11px; color: #aaa; padding: 0 20px 40px; }
+
+    /* ── ALERT ── */
+    .alert {
+      display: flex; gap: 10px; align-items: flex-start;
+      padding: 13px 16px;
+      border-radius: 8px;
+      font-size: 12px;
+      margin-top: 14px;
+    }
+    .alert-ico { font-size: 18px; flex-shrink: 0; }
+    .alert-red    { background: #fdecea; border-left: 4px solid #c0392b; color: #7b241c; }
+    .alert-yellow { background: #fffde7; border-left: 4px solid var(--gold); color: #7d6608; }
+    .alert-green  { background: #eafaf1; border-left: 4px solid var(--green); color: #1a5e35; }
+
+    /* ── divider ── */
+    .spacer { height: 8px; }
+  </style>
+</head>
+<body>
+
+<!-- ═══════ PORTADA ═══════ -->
+<div class="cover">
+  <div class="cover-eyebrow">Dashboard Gerencial · Auditoría Digital 2026</div>
+  <h1>Mercado Cambiario<br><span>mercadocambiario.pe</span></h1>
+  <div class="cover-sub">Resumen ejecutivo · Presencia digital, mercado, equipo, oportunidades y riesgos</div>
+  <div class="cover-pills">
+    <span class="cover-pill">Marzo 2026</span>
+    <span class="cover-pill">Fintech · Marketplace de Divisas</span>
+    <span class="cover-pill">Perú</span>
+    <span class="cover-pill">SBS 03053-2024</span>
+    <span class="cover-pill">Lanzamiento: Febrero 2025</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- ═══ KPIs CLAVE ═══ -->
+  <div class="section-label">Métricas clave del mercado</div>
+  <div class="kpi-strip">
+    <div class="kpi navy">
+      <div class="kpi-val">US$12B</div>
+      <div class="kpi-label">Mercado total divisas Perú / año</div>
+    </div>
+    <div class="kpi red">
+      <div class="kpi-val">99%</div>
+      <div class="kpi-label">Del mercado aún en manos de bancos</div>
+    </div>
+    <div class="kpi green">
+      <div class="kpi-val">350+</div>
+      <div class="kpi-label">Clientes activos al lanzamiento</div>
+    </div>
+    <div class="kpi gold">
+      <div class="kpi-val">&lt;5 min</div>
+      <div class="kpi-label">Por operación vs. 30–45 min del sector</div>
+    </div>
+  </div>
+  <div class="kpi-strip">
+    <div class="kpi orange">
+      <div class="kpi-val">4x</div>
+      <div class="kpi-label">Mayor spread bancario vs. fintech</div>
+    </div>
+    <div class="kpi navy">
+      <div class="kpi-val">~40</div>
+      <div class="kpi-label">Casas de cambio digitales en Perú (todas OTC)</div>
+    </div>
+    <div class="kpi green">
+      <div class="kpi-val">US$11.9K</div>
+      <div class="kpi-label">Ticket promedio clientes B2B</div>
+    </div>
+    <div class="kpi gold">
+      <div class="kpi-val">17%</div>
+      <div class="kpi-label">Crecimiento anual del sector fintech peruano</div>
+    </div>
+  </div>
+
+  <!-- ═══ EQUIPO + MERCADO ═══ -->
+  <div class="section-label">Equipo y directorio</div>
+  <div class="row-65">
+
+    <!-- Equipo -->
+    <div class="card">
+      <div class="card-head"><span class="ico">👥</span>Co-fundadores</div>
+      <div class="team-grid">
+        <div class="team-row">
+          <div class="team-avatar av-navy">🏦</div>
+          <div>
+            <div class="team-name">Fernando Balbuena Favarato</div>
+            <div class="team-role">Presidente y Co-fundador</div>
+            <div class="team-bio">20 años en BCP y Mibanco. Creó la 1ª billetera electrónica de Mibanco (2012).</div>
+          </div>
+        </div>
+        <div class="team-row">
+          <div class="team-avatar av-navy">💡</div>
+          <div>
+            <div class="team-name">Hugo Ortiz</div>
+            <div class="team-role">Co-fundador · Gerente de Negocios</div>
+            <div class="team-bio">25 años en banca digital y desarrollo de productos financieros.</div>
+          </div>
+        </div>
+        <div class="team-row">
+          <div class="team-avatar av-navy">⚙️</div>
+          <div>
+            <div class="team-name">José Agois</div>
+            <div class="team-role">Co-fundador · Gerente General</div>
+            <div class="team-bio">+30 años en sistemas/operaciones: Banco Santander, Banco Sur, Mibanco.</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:18px">
+        <div class="card-head" style="margin-bottom:12px"><span class="ico">👑</span>Directorio Institucional</div>
+        <div class="board-row">
+          <div class="board-name">Oscar Rivera</div>
+          <div class="board-role">Expresidente ASBANC y FELABAN</div>
+          <div class="board-bio">Máxima representación del sistema bancario peruano y latinoamericano.</div>
+        </div>
+        <div class="board-row" style="margin-bottom:0">
+          <div class="board-name">Francis Stenning</div>
+          <div class="board-role">Ex Gerente General y Director — Bolsa de Valores de Lima</div>
+          <div class="board-bio">Expertise directo en mercados de capitales y modelos de libro de órdenes.</div>
+        </div>
+      </div>
+
+      <div class="alert alert-green">
+        <div class="alert-ico">★</div>
+        <div><strong>Activo subutilizado:</strong> Este directorio no está visible en el sitio web. Publicarlo sería el diferenciador de confianza de menor costo y mayor impacto inmediato.</div>
+      </div>
+    </div>
+
+    <!-- Mercado funnel -->
+    <div class="card">
+      <div class="card-head"><span class="ico">📊</span>Distribución del Mercado</div>
+      <div class="funnel">
+        <div class="funnel-bar">
+          <div class="f-label">Total Perú</div>
+          <div class="f-track"><div class="f-fill f-navy" style="width:100%">US$12,000M</div></div>
+        </div>
+        <div class="funnel-bar">
+          <div class="f-label">Bancos</div>
+          <div class="f-track"><div class="f-fill f-navy" style="width:99%">99%</div></div>
+        </div>
+        <div class="funnel-bar">
+          <div class="f-label">Todas las fintech</div>
+          <div class="f-track"><div class="f-fill f-gold" style="width:15%">1.24%</div></div>
+        </div>
+        <div class="funnel-bar">
+          <div class="f-label">Mercado Cambiario</div>
+          <div class="f-track"><div class="f-fill f-red" style="width:3%">&lt;0.1%</div></div>
+        </div>
+        <div class="funnel-bar">
+          <div class="f-label">Meta (3 años)</div>
+          <div class="f-track"><div class="f-fill f-green" style="width:8%">~US$1B</div></div>
+        </div>
+      </div>
+
+      <div style="margin-top:20px">
+        <div class="card-head" style="margin-bottom:12px"><span class="ico">🏆</span>Competidores Principales</div>
+        <div class="comp-list">
+          <div class="comp-row">
+            <div class="comp-name">Rextie</div>
+            <div class="comp-bar-wrap"><div class="comp-bar-fill" style="width:100%"></div></div>
+            <div class="comp-val">US$4,000M/año</div>
+          </div>
+          <div class="comp-row">
+            <div class="comp-name">Kambista</div>
+            <div class="comp-bar-wrap"><div class="comp-bar-fill" style="width:16%"></div></div>
+            <div class="comp-val">US$631M · 454K usuarios</div>
+          </div>
+          <div class="comp-row">
+            <div class="comp-name">Tucambista</div>
+            <div class="comp-bar-wrap"><div class="comp-bar-fill" style="width:8%"></div></div>
+            <div class="comp-val">n/d · marca sólida</div>
+          </div>
+          <div class="comp-row">
+            <div class="comp-name">Global66</div>
+            <div class="comp-bar-wrap"><div class="comp-bar-fill" style="width:5%"></div></div>
+            <div class="comp-val">Crece 3x en 2026</div>
+          </div>
+          <div class="comp-row me">
+            <div class="comp-name" style="color:#c0392b">★ Mercado Camb.</div>
+            <div class="comp-bar-wrap"><div class="comp-bar-fill" style="width:1%; background:#e94560"></div></div>
+            <div class="comp-val" style="color:#c0392b">Único marketplace</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PRESENCIA DIGITAL + STACK ═══ -->
+  <div class="section-label">Presencia digital y tecnología</div>
+  <div class="row2">
+
+    <!-- Semáforo -->
+    <div class="card">
+      <div class="card-head"><span class="ico">🌐</span>Estado Presencia Digital</div>
+      <div class="semaforo-list">
+        <div class="semaforo-row">
+          <div>
+            <div class="s-label">Registro SBS 03053-2024</div>
+            <div class="s-detail">Publicado en footer del sitio web</div>
+          </div>
+          <div class="s-dot s-ok"></div>
+        </div>
+        <div class="semaforo-row">
+          <div>
+            <div class="s-label">Google Business Profile</div>
+            <div class="s-detail">Perfil activo en Google Maps</div>
+          </div>
+          <div class="s-dot s-ok"></div>
+        </div>
+        <div class="semaforo-row">
+          <div>
+            <div class="s-label">LinkedIn</div>
+            <div class="s-detail">Página activa — #mercadocambiario</div>
+          </div>
+          <div class="s-dot s-ok"></div>
+        </div>
+        <div class="semaforo-row">
+          <div>
+            <div class="s-label">Instagram</div>
+            <div class="s-detail">Cuenta activa @mercadocambiario</div>
+          </div>
+          <div class="s-dot s-ok"></div>
+        </div>
+        <div class="semaforo-row">
+          <div>
+            <div class="s-label">YouTube</div>
+            <div class="s-detail">Canal activo — en construcción</div>
+          </div>
+          <div class="s-dot s-ok"></div>
+        </div>
+        <div class="semaforo-row">
+          <div>
+            <div class="s-label">Presencia en Comparadores</div>
+            <div class="s-detail">cuantoestaeldolar.pe · cambioseguro.com · etc.</div>
+          </div>
+          <div class="s-dot s-bad"></div>
+        </div>
+        <div class="semaforo-row">
+          <div>
+            <div class="s-label">Reseñas Google</div>
+            <div class="s-detail">Volumen prácticamente inexistente</div>
+          </div>
+          <div class="s-dot s-bad"></div>
+        </div>
+        <div class="semaforo-row">
+          <div>
+            <div class="s-label">SEO Orgánico</div>
+            <div class="s-detail">Sin blog ni backlinks — dominio muy nuevo</div>
+          </div>
+          <div class="s-dot s-bad"></div>
+        </div>
+        <div class="semaforo-row">
+          <div>
+            <div class="s-label">TikTok / X (Twitter)</div>
+            <div class="s-detail">Sin presencia detectada</div>
+          </div>
+          <div class="s-dot s-warn"></div>
+        </div>
+        <div class="semaforo-row">
+          <div>
+            <div class="s-label">App Móvil</div>
+            <div class="s-detail">Sin app nativa en stores</div>
+          </div>
+          <div class="s-dot s-bad"></div>
+        </div>
+        <div class="semaforo-row">
+          <div>
+            <div class="s-label">Cobertura en medios de primer nivel</div>
+            <div class="s-detail">Sin Gestión, RPP, El Comercio, Semana Económica</div>
+          </div>
+          <div class="s-dot s-bad"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stack + RRSS -->
+    <div style="display:flex; flex-direction:column; gap:16px;">
+
+      <!-- RRSS detalle -->
+      <div class="card">
+        <div class="card-head"><span class="ico">📱</span>Redes Sociales</div>
+        <div class="rrss-grid">
+          <div class="rrss-item rrss-ok">
+            <div class="r-ico">💼</div>
+            <div class="r-name">LinkedIn</div>
+            <div class="r-status">✅ Activo</div>
+          </div>
+          <div class="rrss-item rrss-ok">
+            <div class="r-ico">📸</div>
+            <div class="r-name">Instagram</div>
+            <div class="r-status">✅ Activo</div>
+          </div>
+          <div class="rrss-item rrss-ok">
+            <div class="r-ico">▶️</div>
+            <div class="r-name">YouTube</div>
+            <div class="r-status">✅ Activo</div>
+          </div>
+          <div class="rrss-item rrss-bad">
+            <div class="r-ico">🎵</div>
+            <div class="r-name">TikTok</div>
+            <div class="r-status">❌ Pendiente</div>
+          </div>
+          <div class="rrss-item rrss-bad">
+            <div class="r-ico">📘</div>
+            <div class="r-name">Facebook</div>
+            <div class="r-status">❌ No detectado</div>
+          </div>
+          <div class="rrss-item rrss-warn">
+            <div class="r-ico">✖️</div>
+            <div class="r-name">X / Twitter</div>
+            <div class="r-status">⚠ Pendiente</div>
+          </div>
+        </div>
+        <div class="alert alert-yellow" style="margin-top:12px">
+          <div class="alert-ico">⚠</div>
+          <div>LinkedIn, Instagram y YouTube activos — siguiente paso: <strong>cadencia editorial constante</strong> y lanzar TikTok para alcance masivo retail.</div>
+        </div>
+      </div>
+
+      <!-- Stack tecnológico -->
+      <div class="card">
+        <div class="card-head"><span class="ico">⚙️</span>Stack Tecnológico</div>
+        <div class="stack-list">
+          <div class="stack-row">
+            <div class="stack-ico">🏗️</div>
+            <div>
+              <div class="stack-key">ERP / Back-office</div>
+              <div class="stack-val"><strong>Odoo</strong> — confirmado vía caso de éxito oficial odoo.com</div>
+            </div>
+          </div>
+          <div class="stack-row">
+            <div class="stack-ico">📋</div>
+            <div>
+              <div class="stack-key">Motor del Marketplace</div>
+              <div class="stack-val">Desarrollo propio — libro de órdenes propietario</div>
+            </div>
+          </div>
+          <div class="stack-row">
+            <div class="stack-ico">🏦</div>
+            <div>
+              <div class="stack-key">Integración Bancaria</div>
+              <div class="stack-val">API propia con bancos → liquidación en &lt;5 min</div>
+            </div>
+          </div>
+          <div class="stack-row">
+            <div class="stack-ico">🪪</div>
+            <div>
+              <div class="stack-key">KYC / Identidad</div>
+              <div class="stack-val">Probable API RENIEC + biometría (obligatorio SBS/UIF)</div>
+            </div>
+          </div>
+          <div class="stack-row">
+            <div class="stack-ico">📲</div>
+            <div>
+              <div class="stack-key">App Móvil</div>
+              <div class="stack-val">Sin app nativa. Brecha frente a todos los competidores.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ OPORTUNIDADES + RIESGOS ═══ -->
+  <div class="section-label">Oportunidades y riesgos</div>
+  <div class="row2">
+
+    <!-- Oportunidades -->
+    <div class="card">
+      <div class="card-head"><span class="ico">🚀</span>Oportunidades Clave</div>
+      <div class="opp-list">
+        <div class="opp-row opp-b">
+          <div class="opp-num">1</div>
+          <div>
+            <div class="opp-title">Elecciones 2026 — Catalizador</div>
+            <div class="opp-desc">12 de abril de 2026. Incertidumbre electoral → mayor demanda de dólares → más volumen para el marketplace.</div>
+          </div>
+        </div>
+        <div class="opp-row opp-a">
+          <div class="opp-num">2</div>
+          <div>
+            <div class="opp-title">Mercado 99% sin capturar</div>
+            <div class="opp-desc">Bancos controlan el 99% con spread 4x mayor. La oportunidad de desplazamiento es estructural y sostenida.</div>
+          </div>
+        </div>
+        <div class="opp-row opp-c">
+          <div class="opp-num">3</div>
+          <div>
+            <div class="opp-title">BCRP Fase 4 — Interoperabilidad</div>
+            <div class="opp-desc">Desde abril 2026. Fintech como iniciadores de pago (PSIP). Integración posible con Yape (10M+ usuarios) y Plin.</div>
+          </div>
+        </div>
+        <div class="opp-row opp-a">
+          <div class="opp-num">4</div>
+          <div>
+            <div class="opp-title">B2B — Ticket 9x Mayor</div>
+            <div class="opp-desc">Empresas: ticket promedio US$11,900 vs. US$1,300 retail. Rextie tiene el 40% del corporativo — espacio real para competir.</div>
+          </div>
+        </div>
+        <div class="opp-row opp-b">
+          <div class="opp-num">5</div>
+          <div>
+            <div class="opp-title">Sandbox Regulatorio SBS</div>
+            <div class="opp-desc">Resolución N° 04142-2025: probar modelos innovadores sin autorización previa. Iteración de producto con menor riesgo.</div>
+          </div>
+        </div>
+        <div class="opp-row opp-c">
+          <div class="opp-num">6</div>
+          <div>
+            <div class="opp-title">Integración SUNAT Automática</div>
+            <div class="opp-desc">Reportes en formato SUNAT (tipo de cambio oficial, ITF). Diferenciador enorme para empresas y contadores.</div>
+          </div>
+        </div>
+        <div class="opp-row opp-a">
+          <div class="opp-num">7</div>
+          <div>
+            <div class="opp-title">IA en el Libro de Órdenes</div>
+            <div class="opp-desc">Algoritmos de matching inteligente y pricing dinámico. Rextie ya usa IA en 2025 — oportunidad de diferenciación tecnológica.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Riesgos -->
+    <div class="card">
+      <div class="card-head"><span class="ico">⚠️</span>Matriz de Riesgos</div>
+      <div class="risk-list">
+        <div class="risk-row">
+          <div class="risk-badge rb-critico">CRÍTICO</div>
+          <div>
+            <div class="risk-text">Liquidez del libro de órdenes</div>
+            <div class="risk-desc">Con 350 clientes, el libro puede ser demasiado delgado. Sin masa crítica en ambos lados el precio no se forma.</div>
+          </div>
+        </div>
+        <div class="risk-row">
+          <div class="risk-badge rb-alto">ALTO</div>
+          <div>
+            <div class="risk-text">Electoral 2026</div>
+            <div class="risk-desc">Alta volatilidad puede agotar un lado del libro. Si candidato moderado: volumen adicional positivo.</div>
+          </div>
+        </div>
+        <div class="risk-row">
+          <div class="risk-badge rb-alto">ALTO</div>
+          <div>
+            <div class="risk-text">Acceso bancario</div>
+            <div class="risk-desc">Los bancos pueden cerrar cuentas a la fintech sin justificación. Sin cuentas bancarias → operación paralizada.</div>
+          </div>
+        </div>
+        <div class="risk-row">
+          <div class="risk-badge rb-alto">ALTO</div>
+          <div>
+            <div class="risk-text">Lavado de activos / Fraude</div>
+            <div class="risk-desc">Velocidad &lt;5 min reduce ventana de detección. Un caso vinculado puede desencadenar intervención UIF.</div>
+          </div>
+        </div>
+        <div class="risk-row">
+          <div class="risk-badge rb-medio">MEDIO</div>
+          <div>
+            <div class="risk-text">Regulatorio / UIF</div>
+            <div class="risk-desc">SBS 03053-2024 confirmado. Riesgo residual: SIPLAFT, reportes RO/ROS, Ley N° 32209.</div>
+          </div>
+        </div>
+        <div class="risk-row">
+          <div class="risk-badge rb-medio">MEDIO</div>
+          <div>
+            <div class="risk-text">Imitación por incumbentes</div>
+            <div class="risk-desc">Rextie y Kambista pueden copiar el modelo marketplace en meses si detectan tracción real.</div>
+          </div>
+        </div>
+        <div class="risk-row">
+          <div class="risk-badge rb-medio">MEDIO</div>
+          <div>
+            <div class="risk-text">Bancos digitales (Yape/BBVA)</div>
+            <div class="risk-desc">Si BCP/BBVA alcanzan spreads competitivos con distribución masiva, el mercado addressable se reduce.</div>
+          </div>
+        </div>
+        <div class="risk-row">
+          <div class="risk-badge rb-bajo">BAJO</div>
+          <div>
+            <div class="risk-text">Niño Costero 2026</div>
+            <div class="risk-desc">Desaceleración económica → menor volumen transaccional empresarial.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ ROADMAP ═══ -->
+  <div class="section-label">Plan de acción — Roadmap 90 días</div>
+  <div class="card">
+    <div class="card-head"><span class="ico">📅</span>Prioridades por Impacto</div>
+    <div class="roadmap-list">
+
+      <div class="rm-row rm-done">
+        <div><span class="rm-badge bm-done">✅ Hecho</span></div>
+        <div class="rm-action">Registro SBS 03053-2024 publicado en footer</div>
+        <div class="rm-impact">Confianza regulatoria</div>
+      </div>
+
+      <div class="rm-row rm-done">
+        <div><span class="rm-badge bm-done">✅ Hecho</span></div>
+        <div class="rm-action">Google Business Profile activo</div>
+        <div class="rm-impact">SEO local</div>
+      </div>
+
+      <div class="rm-row rm-done">
+        <div><span class="rm-badge bm-done">✅ Hecho</span></div>
+        <div class="rm-action">LinkedIn + Instagram + YouTube activos</div>
+        <div class="rm-impact">Marca digital</div>
+      </div>
+
+      <div class="rm-row rm-red">
+        <div><span class="rm-badge bm-red">🔴 Crítico</span></div>
+        <div class="rm-action">Alta en comparadores: cuantoestaeldolar.pe, comparaeldolar.com, cambioseguro.com</div>
+        <div class="rm-impact">Tráfico referido</div>
+      </div>
+
+      <div class="rm-row rm-red">
+        <div><span class="rm-badge bm-red">🔴 Crítico</span></div>
+        <div class="rm-action">Escalar reseñas Google Business (solicitud post-operación)</div>
+        <div class="rm-impact">Confianza y conversión</div>
+      </div>
+
+      <div class="rm-row rm-red">
+        <div><span class="rm-badge bm-red">🔴 Crítico</span></div>
+        <div class="rm-action">Publicar equipo y directorio (Rivera, Stenning) en sección "Nosotros"</div>
+        <div class="rm-impact">Confianza institucional</div>
+      </div>
+
+      <div class="rm-row rm-orange">
+        <div><span class="rm-badge bm-orange">🟠 Alto</span></div>
+        <div class="rm-action">Calendario editorial: 3 posts/semana en LinkedIn + Instagram + YouTube</div>
+        <div class="rm-impact">Comunidad</div>
+      </div>
+
+      <div class="rm-row rm-orange">
+        <div><span class="rm-badge bm-orange">🟠 Alto</span></div>
+        <div class="rm-action">Lanzar TikTok con Reels explicativos del modelo marketplace (60–90s)</div>
+        <div class="rm-impact">Alcance masivo retail</div>
+      </div>
+
+      <div class="rm-row rm-orange">
+        <div><span class="rm-badge bm-orange">🟠 Alto</span></div>
+        <div class="rm-action">Blog con tipo de cambio diario + artículos SEO</div>
+        <div class="rm-impact">SEO orgánico</div>
+      </div>
+
+      <div class="rm-row rm-orange">
+        <div><span class="rm-badge bm-orange">🟠 Alto</span></div>
+        <div class="rm-action">Estrategia de PR: Gestión, Semana Económica, RPP (usar directorio como palanca)</div>
+        <div class="rm-impact">Credibilidad / medios</div>
+      </div>
+
+      <div class="rm-row rm-yellow">
+        <div><span class="rm-badge bm-yellow">🟡 Medio</span></div>
+        <div class="rm-action">PWA o versión mobile optimizada</div>
+        <div class="rm-impact">Conversión móvil</div>
+      </div>
+
+      <div class="rm-row rm-yellow">
+        <div><span class="rm-badge bm-yellow">🟡 Medio</span></div>
+        <div class="rm-action">Programa de referidos (cliente refiere → descuento próxima op.)</div>
+        <div class="rm-impact">Reducción CAC</div>
+      </div>
+
+      <div class="rm-row rm-yellow">
+        <div><span class="rm-badge bm-yellow">🟡 Medio</span></div>
+        <div class="rm-action">Producto B2B para tesorería corporativa (dashboard + API)</div>
+        <div class="rm-impact">Ticket promedio 9x</div>
+      </div>
+
+      <div class="rm-row rm-blue">
+        <div><span class="rm-badge bm-blue">🔵 Largo plazo</span></div>
+        <div class="rm-action">Integración BCRP Fase 4 (Yape/Plin como canal)</div>
+        <div class="rm-impact">Escala masiva</div>
+      </div>
+
+      <div class="rm-row rm-blue">
+        <div><span class="rm-badge bm-blue">🔵 Largo plazo</span></div>
+        <div class="rm-action">API pública de tipo de cambio en tiempo real para terceros</div>
+        <div class="rm-impact">Ecosistema</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══ CONCLUSIÓN ═══ -->
+  <div class="section-label">Conclusión ejecutiva</div>
+  <div class="concl">
+    <h2>Conclusión para Gerencia</h2>
+    <div class="concl-grid">
+      <div class="concl-col">
+        <h3>Fortalezas únicas</h3>
+        <ul>
+          <li><strong>Único marketplace</strong> con libro de órdenes en Perú — las ~40 competidoras son OTC.</li>
+          <li><strong>Equipo con 20–30 años de banca</strong>: BCP, Mibanco, Banco Santander.</li>
+          <li><strong>Directorio de primer nivel</strong>: ex-ASBANC/FELABAN + ex-CEO Bolsa de Valores.</li>
+          <li><strong>&lt;5 minutos por operación</strong> vs. 30–45 min del sector.</li>
+          <li>LinkedIn, Instagram y YouTube <strong>activos</strong> — base digital establecida.</li>
+          <li>Registro <strong>SBS 03053-2024</strong> confirmado y publicado.</li>
+        </ul>
+      </div>
+      <div class="concl-col">
+        <h3>Acciones más urgentes</h3>
+        <ul>
+          <li><strong>Alta inmediata</strong> en comparadores de tipo de cambio.</li>
+          <li><strong>Escalar reseñas Google</strong> — el usuario fintech compara reviews antes de registrarse.</li>
+          <li><strong>Publicar el directorio</strong> en el sitio — activo de mayor impacto y menor costo.</li>
+          <li><strong>Cadencia editorial constante</strong> en las 3 redes activas + TikTok.</li>
+          <li>Aumentar <strong>liquidez del libro</strong> — riesgo crítico con 350 clientes activos.</li>
+          <li>PR activo en <strong>Gestión y Semana Económica</strong> usando el directorio como palanca.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="concl-footer">
+      El mercado disponible es US$12,000M anuales con el 99% en manos de bancos y un spread 4x mayor. El viento de las elecciones 2026 (12 de abril) generará demanda adicional de dólares. La ventana de oportunidad para consolidar posición antes de que los incumbentes repliquen el modelo es el próximo año. · Fuentes: Startups Latam · Odoo · Gestión PE · SBS Perú · Rextie Blog · Kambista · EY Perú · BCRP
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Auditoría Digital Mercado Cambiario · Versión Gerencial · Marzo 2026 · Claude Code (Anthropic)
+</footer>
+
+</body>
+</html>
